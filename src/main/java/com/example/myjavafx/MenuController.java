@@ -15,8 +15,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.util.Objects;
-import java.util.Scanner;
 
 public class MenuController {
 
@@ -100,8 +98,6 @@ public class MenuController {
     private TextField firstName;
     @FXML
     private TextField lastName;
-    @FXML
-    private TextField asuID;
     @FXML
     private TextField asuEmail;
     @FXML
@@ -234,49 +230,31 @@ public class MenuController {
         else if(lastName.getText().isEmpty()){
             signUpError.setText("Please Enter Last Name!");
         }
-        else if(asuEmail.getText().isEmpty()){
-            signUpError.setText("Please Enter ASU Email");
-        }
-        else if(password.getText().isEmpty()){
-            signUpError.setText("Please Enter ASU Password");
-        }
-        else if(asuID.getText().isEmpty()){
-            signUpError.setText("Please Enter ASU ID");
-        }
         else {
             String userFirstName = firstName.getText();
             String userLastName = lastName.getText();
-            String userAsuId = asuID.getText();
             String userAsuEmail = asuEmail.getText();
             String userPassword = password.getText();
-            String pathName = "Database/users.txt";
-
-            BufferedReader read = new BufferedReader(new FileReader(pathName));
-            String lineString = null;
-            String[] values = new String[0];
-            while((lineString = read.readLine()) != null){
-                values = lineString.split(",");
-            }
-            //This is for the first line. Now need to read fill txt file to see if any line has equal asuID
-            // try while loop
-            // while()
-
-            if(Objects.equals(values[0], asuID.getText())){
-                signUpError.setText("ASU ID already exists");
-            }
-            else {
-                //newUser.createNewFile();
-                String text = userAsuId + "," +
-                        userAsuEmail + "," +
-                        userPassword + "," +
-                        userFirstName + "," +
-                        userLastName;
+            String dir = "Database/";
+            String fileName = userFirstName + "_" + userLastName + ".txt";
+            String pathName = dir + fileName;
+            System.out.println(fileName);
+            File newUser = new File(dir, fileName);
+            if (!newUser.exists()) {
+                newUser.createNewFile();
+                String text = userFirstName + "," +
+                              userLastName + "," +
+                              userAsuEmail + "," +
+                              userPassword;
                 BufferedWriter buf = new BufferedWriter(new FileWriter(pathName, true));
-                buf.write(text + "\n");
+                buf.write(text);
                 buf.close();
+
+
+            } else {
+                // test
+                signUpError.setText("User already exists, please try again!");
             }
-
-
         }
     }
 }
