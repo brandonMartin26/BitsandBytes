@@ -253,9 +253,7 @@ public class MenuController {
 
             BufferedReader read = new BufferedReader(new FileReader(pathName));
             String lineString = null;
-            String idVal = null;
             String[] values = new String[0];
-            String[] ids = new String[0];
             while((lineString = read.readLine()) != null){
                 values = lineString.split(",");
             }
