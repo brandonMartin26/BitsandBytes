@@ -1,0 +1,4 @@
+123456789,bvmati3@asu.edu,helloWorld!,Brandon,Martin
+987654321,josh4@asu.edu,joshTempPass14!,Josh,Jones
+6549878321,kylea2@asu.edu,kyleAnderson234!,Kyle,Anderson
+8796541258,omarh@asu.edu,omarTempPassword23!,Omar,Hernandez

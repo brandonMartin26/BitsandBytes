@@ -22,22 +22,22 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="59.0" layoutY="219.0" prefHeight="32.0" prefWidth="67.0" text="ASU Email: ">
+      <Label layoutX="59.0" layoutY="222.0" prefHeight="32.0" prefWidth="67.0" text="ASU Email: ">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="63.0" layoutY="275.0" prefHeight="32.0" prefWidth="67.0" text="Password: ">
+      <Label layoutX="59.0" layoutY="262.0" prefHeight="32.0" prefWidth="67.0" text="Password: ">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="firstName" layoutX="139.0" layoutY="98.0" />
-      <TextField fx:id="lastName" layoutX="138.0" layoutY="139.0" />
-      <TextField fx:id="asuEmail" layoutX="138.0" layoutY="222.0" />
-      <TextField fx:id="password" layoutX="139.0" layoutY="278.0" />
-      <Button fx:id="signUp" layoutX="152.0" layoutY="327.0" mnemonicParsing="false" onAction="#signUpSave" text="Sign Up!" />
-      <Button fx:id="backToLogin" layoutX="236.0" layoutY="327.0" mnemonicParsing="false" onAction="#switchToMemberLogin" text="Back to Login" />
+      <TextField fx:id="firstName" layoutX="139.0" layoutY="98.0" promptText="Enter First Name" />
+      <TextField fx:id="lastName" layoutX="138.0" layoutY="139.0" promptText="Enter Last Name" />
+      <TextField fx:id="asuEmail" layoutX="138.0" layoutY="225.0" promptText="Enter ASUuser@asu.edu" />
+      <TextField fx:id="password" layoutX="139.0" layoutY="265.0" promptText="Enter ASU password" />
+      <Button fx:id="signUp" layoutX="139.0" layoutY="314.0" mnemonicParsing="false" onAction="#signUpSave" text="Sign Up!" />
+      <Button fx:id="backToLogin" layoutX="236.0" layoutY="314.0" mnemonicParsing="false" onAction="#switchToMemberLogin" text="Back to Login" />
       <Label fx:id="signUpError" layoutX="152.0" layoutY="369.0" prefHeight="17.0" prefWidth="354.0" textFill="#f2eded">
          <font>
             <Font name="System Bold Italic" size="14.0" />
@@ -45,6 +45,11 @@
          <effect>
             <DropShadow />
          </effect></Label>
-      <Label layoutX="79.0" layoutY="183.0" text="ASU ID: " />
+      <Label layoutX="58.0" layoutY="186.0" text="ASU ID: ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="asuID" layoutX="138.0" layoutY="182.0" promptText="Enter ASU ID" />
    </children>
 </AnchorPane>
