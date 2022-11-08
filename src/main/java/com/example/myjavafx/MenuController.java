@@ -253,6 +253,7 @@ public class MenuController {
 
             } else {
                 // test
+                //test2
                 signUpError.setText("User already exists, please try again!");
             }
         }
