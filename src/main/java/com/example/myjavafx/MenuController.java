@@ -14,7 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
 
 public class MenuController {
 
@@ -22,8 +22,10 @@ public class MenuController {
     private Scene scene;
     private Parent root;
 
+
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //BEGIN VARIABLES FOR MENU
-    //+++++++++++++++++++++++
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     @FXML
     private GridPane cartGridPane;
 
@@ -53,11 +55,11 @@ public class MenuController {
 
     @FXML
     private Label topLabel;
-    //+++++++++++++++++++
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //END VARIABLES FOR MENU
 
     //BEGIN VARIABLES FOR LOGIN
-    //+++++++++++++++++++++
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     @FXML
     private Button contAsGuestBtn;
 
@@ -71,6 +73,9 @@ public class MenuController {
     private Label loginLabel;
 
     @FXML
+    private TextField usernameField;
+
+    @FXML
     private TextField passwordField;
 
     @FXML
@@ -78,17 +83,32 @@ public class MenuController {
 
     @FXML
     private Button signUpBtn;
-
-    @FXML
-    private TextField usernameField;
-
     @FXML
     private Label usernameLabel;
-    //++++++++++++++++++++++++
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //END VARIABLES FOR LOGIN
 
+    //START VARIABLES FOR SIGNUP
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    @FXML
+    private Button signUp;
+    @FXML
+    private Button backToLogin;
+    @FXML
+    private TextField firstName;
+    @FXML
+    private TextField lastName;
+    @FXML
+    private TextField asuEmail;
+    @FXML
+    private TextField password;
+    @FXML
+    private Label signUpError;
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //END VARIABLES FOR SIGNUP
+
     //START VARIABLES FOR CHECKOUT
-    //++++++++++++++++++++++
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     @FXML
     private GridPane asuIDPane;
 
@@ -121,11 +141,11 @@ public class MenuController {
 
     @FXML
     private Label totalLabel;
-    //+++++++++++++++++++++++++++
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //END VARIABLES FOR CHECKOUT
 
     //START VARIABLES FOR PROCESSING
-    //+++++++++++++++++++++++++++++++
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     @FXML
     private Label cookingLabel;
 
@@ -140,20 +160,31 @@ public class MenuController {
 
     @FXML
     private Label yourOrderIsLabel;
-    //+++++++++++++++++++++++++++
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //END VARIABLES FOR PROCESSING
 
     //START VARIABLES FOR CHEF VIEW
-    //+++++++++++++++++++++++++++++
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     @FXML
     private Button backToMenuTempBtn;
 
     @FXML
     private AnchorPane chefViewAnchor;
-    //+++++++++++++++++++++++++++++
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //END VARIABLES FOR CHEF VIEW
+
+
+
     public void switchToMemberLogin(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("memberLogin.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToSignUp(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("signUp.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -176,7 +207,6 @@ public class MenuController {
         stage.show();
     }
 
-
     public void switchToProcessing(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("processingPage.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -191,6 +221,40 @@ public class MenuController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void signUpSave(ActionEvent event) throws IOException{
+        if(firstName.getText().isEmpty()){
+            signUpError.setText("Please enter First Name!");
+        }
+        else if(lastName.getText().isEmpty()){
+            signUpError.setText("Please Enter Last Name!");
+        }
+        else {
+            String userFirstName = firstName.getText();
+            String userLastName = lastName.getText();
+            String userAsuEmail = asuEmail.getText();
+            String userPassword = password.getText();
+            String dir = "Database/";
+            String fileName = userFirstName + "_" + userLastName + ".txt";
+            String pathName = dir + fileName;
+            System.out.println(fileName);
+            File newUser = new File(dir, fileName);
+            if (!newUser.exists()) {
+                newUser.createNewFile();
+                String text = userFirstName + "," +
+                              userLastName + "," +
+                              userAsuEmail + "," +
+                              userPassword;
+                BufferedWriter buf = new BufferedWriter(new FileWriter(pathName, true));
+                buf.write(text);
+                buf.close();
+
+
+            } else {
+                signUpError.setText("User already exists, please try again!");
+            }
+        }
     }
 }
 

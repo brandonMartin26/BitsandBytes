@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="560.0" style="-fx-background-color: red;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafx.MenuController">
+   <children>
+      <Label layoutX="81.0" layoutY="14.0" prefHeight="59.0" prefWidth="397.0" text="Bits and Bytes Sign Up!">
+         <font>
+            <Font name="System Bold Italic" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="95.0" prefHeight="32.0" prefWidth="75.0" text="First Name: ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="136.0" prefHeight="32.0" prefWidth="67.0" text="Last Name:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="219.0" prefHeight="32.0" prefWidth="67.0" text="ASU Email: ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="63.0" layoutY="275.0" prefHeight="32.0" prefWidth="67.0" text="Password: ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="firstName" layoutX="139.0" layoutY="98.0" />
+      <TextField fx:id="lastName" layoutX="138.0" layoutY="139.0" />
+      <TextField fx:id="asuEmail" layoutX="138.0" layoutY="222.0" />
+      <TextField fx:id="password" layoutX="139.0" layoutY="278.0" />
+      <Button fx:id="signUp" layoutX="152.0" layoutY="327.0" mnemonicParsing="false" onAction="#signUpSave" text="Sign Up!" />
+      <Button fx:id="backToLogin" layoutX="236.0" layoutY="327.0" mnemonicParsing="false" onAction="#switchToMemberLogin" text="Back to Login" />
+      <Label fx:id="signUpError" layoutX="152.0" layoutY="369.0" prefHeight="17.0" prefWidth="354.0" textFill="#f2eded">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect></Label>
+      <Label layoutX="79.0" layoutY="183.0" text="ASU ID: " />
+   </children>
+</AnchorPane>

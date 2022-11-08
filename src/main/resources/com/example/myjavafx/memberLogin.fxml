@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="loginAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BCBCBC;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafx.MenuController">
    <children>
       <Label fx:id="loginLabel" layoutX="155.0" layoutY="71.0" text="Member Login">
@@ -32,7 +31,7 @@
             <Font name="Imprint MT Shadow" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="signUpBtn" layoutX="415.0" layoutY="309.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="82.0" style="-fx-background-color: #761A1A;" text="Sign Up" textFill="WHITE">
+      <Button fx:id="signUpBtn" layoutX="415.0" layoutY="309.0" mnemonicParsing="false" onAction="#switchToSignUp" prefHeight="39.0" prefWidth="82.0" style="-fx-background-color: #761A1A;" text="Sign Up" textFill="WHITE">
          <font>
             <Font name="Imprint MT Shadow" size="15.0" />
          </font>
