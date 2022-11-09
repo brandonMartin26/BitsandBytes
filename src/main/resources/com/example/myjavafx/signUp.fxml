@@ -36,7 +36,7 @@
       <TextField fx:id="lastName" layoutX="138.0" layoutY="139.0" promptText="Enter Last Name" />
       <TextField fx:id="asuEmail" layoutX="138.0" layoutY="225.0" promptText="Enter ASUuser@asu.edu" />
       <TextField fx:id="password" layoutX="139.0" layoutY="265.0" promptText="Enter ASU password" />
-      <Button fx:id="signUp" layoutX="139.0" layoutY="314.0" mnemonicParsing="false" onAction="#signUpSave" text="Sign Up!" />
+      <Button fx:id="signUp" layoutX="139.0" layoutY="314.0" mnemonicParsing="false" onAction="#SignUpSaved" text="Sign Up!" />
       <Button fx:id="backToLogin" layoutX="236.0" layoutY="314.0" mnemonicParsing="false" onAction="#switchToMemberLogin" text="Back to Login" />
       <Label fx:id="signUpError" layoutX="152.0" layoutY="369.0" prefHeight="17.0" prefWidth="354.0" textFill="#f2eded">
          <font>

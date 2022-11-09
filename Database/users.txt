@@ -1,4 +1,45 @@
-123456789,bvmati3@asu.edu,helloWorld!,Brandon,Martin
-987654321,josh4@asu.edu,joshTempPass14!,Josh,Jones
+9876543211,josh4@asu.edu,joshTempPass14!,Josh,Jones
 6549878321,kylea2@asu.edu,kyleAnderson234!,Kyle,Anderson
-8796541258,omarh@asu.edu,omarTempPassword23!,Omar,Hernandez
+985632478,jim3@asu.edu,jimTempPass34!,Jim,Johnson
+985632753,kylef@asu.edu,blitzAndChips27!,Kyle,Ferguson
+985232541,susana@asu.edu,morty1tony0,Susan,Anderson
+123654789,stevej@asu.edu,appleSucks#69,Steve,Jobs
+112356789,chrisn@asu.edu,P4jps#WwEDjHR?yw,Chris,Norris
+223658974,calebr@asu.edu,oYekh*G9Q?@IeZl0,Caleb,Ripley
+336589214,dustinc@asu.edu,PgYBv4A6^DZNWk@u,Dustin,Chaon
+336578122,tanyal@asu.edu,a3u??O5qXyq@eHp&,Tanya,LaGrone
+447531598,emmap@asu.edu,w%N4*^jQdm&#2#Db,Emma,Pender
+879546213,joseo@asu.edu,ysSIN3EGi$JADqL9,Jose,Ortiz
+546213879,torif@asu.edu,toNg10R8$2?V#8*!,Tori,Fraiser
+213546879,terranceb@asu.edu,bR#Pn$9CcT^Gy@kh,Terrance,Bacon
+248631597,ashleyg@asu.edu,HK^HK5Pw0QxyFmqY,Ashley,Greene
+696969696,toms@asu.edu,XYIrX0KS8Uikq!P$,Tom,Segura
+985412636,shelbym@asu.edu,!e!F8MuA8o1ze$B8,Shelby,Mobley
+145236987,kylem@asu.edu,ewZ77sX#O9%1eZYJ,Kyle ,Martin
+456654789,taniaw@asu.edu,GL0IR7unkZo%m2Iz,Tania,Woolf
+159159951,kaylab@asu.edu,nXaFmVhk1IDOuC9f,Kayla,Burgett
+896589657,rileym@asu.edu,wYuA%6STlXgX*2WO,Ryley,Mac
+474785589,kayb@asu.edu,Bax*wab^FXQNartJ,Kat,Boyd
+121232235,jordanl@asu.edu,4SKNnyBJYWUB$?Gg,Jordan,Lowery
+789856541,jennyc@asu.edu,L5W?RV@xnkDHotr?,Jenny ,Cole
+852258789,ryanw@asu.edu,^3Tc4&4%S5Xlcwqi,Ryan ,Wells
+658965893,emilys@asu.edu,mrZu2p$s!K%KW6x9,Emily,Stuart
+753357841,vinhl@asu.edu,f!sTzdrBFGD0sJr#,Vinh,Le
+365214987,garretth@asu.edu,e$3?gSYLg8HH^fsR,Garrett,Hendel
+322365547,gabrrielad@asu.edu,4pIqzTEpyxkK^ssZ,Gabrriela,Dewar
+412587963,noels@asu.edu,MwcESDhC8KXYh#Cd,Noel,Sandoval
+659887542,brettm@asu.edu,j*4YWy7TRtHy7k@%,Brett,Martin
+548785263,destineep@asu.edu,j%oqmX!j^YPjy#8g,Destinee ,Palosaari
+589632144,victork@asu.edu,$*2H*%6gf?qS3Vfl,Victor,Kalmykov
+123321522,chadf@asu.edu,Y86&c1Vhujvngf?I,Chad,Foust
+789586328,josht@asu.edu,C150*BYOPh%Nooyt,Josh,Tint
+875986321,josepha@asu.edu,?5JRfriF@TAy7ZG9,Joseph,Albaffro
+214598653,ellieb@asu.edu,8?VMy*N^H1q%v^b*,Ellie,Boyer
+547896325,euanb@asu.edu,w!B*iNe3KeexiBlx,Euan ,Blackstone
+965832569,jamesf,!2T&63dV&avHqL%T,James,Fink
+785423659,katelyng@asu.edu,0gH*Jho^SA$jrt52,Katelyn,Gosney
+111111111,bvmarti3@asu.edu,brandonChef#1,Brandon,Martin
+222222222,omarh@asu.edu,omarChef#2,Omar,Hernandez
+333333333,nhuh@asu.edu,nhuChef#3,Nhu,Huynh
+444444444,ethenh@asu.edu,ethanChef#4,Ethan,Hubbard
+555555555,andrewb@asu.edu,andrewChef#5,Andrew,Byers
