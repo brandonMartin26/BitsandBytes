@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -92,6 +93,9 @@ public class MenuController {
     private Button signUpBtn;
     @FXML
     private Label usernameLabel;
+
+    @FXML
+    private Label loginError;
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //END VARIABLES FOR LOGIN
 
@@ -272,6 +276,44 @@ public class MenuController {
 
 
 
+    }
+
+    public void LoginHandler(ActionEvent event) throws IOException {
+        if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty())
+        {
+            loginError.setText("Please make sure all fields are full!");
+        }
+        String fileName = "Database/users.txt";
+        Scanner scanner = new Scanner(Paths.get(fileName), StandardCharsets.UTF_8.name());
+        scanner.useDelimiter(",");
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        String fileID;
+        String fileEmail;
+        String filePassword;
+
+        while(scanner.hasNextLine())
+        {
+            fileID = scanner.next();
+            fileEmail = scanner.next();
+            filePassword = scanner.next();
+            loginError.setText(fileEmail);
+
+            if(username.equals(fileEmail)) //can change to fileID to login with ID instead of email
+            {
+                if(password.equals(filePassword))
+                {
+                    //can pass username to elsewhere here, if needed for other parts
+                    switchToCheckout(event);
+
+                } else {
+                    loginError.setText("Invalid username or password");
+                    break;
+                }
+            }
+            scanner.nextLine();
+        }
+        loginError.setText("Invalid username or password");
     }
 }
 

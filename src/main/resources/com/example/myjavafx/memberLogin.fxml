@@ -26,7 +26,12 @@
       <TextField fx:id="usernameField" layoutX="225.0" layoutY="178.0" prefHeight="26.0" prefWidth="218.0" />
       <TextField fx:id="passwordField" layoutX="227.0" layoutY="209.0" prefHeight="26.0" prefWidth="218.0" />
       <Button fx:id="contAsGuestBtn" layoutX="244.0" layoutY="244.0" mnemonicParsing="false" onAction="#switchToCheckout" text="Continue as Guest" />
-      <Button fx:id="loginBtn" layoutX="132.0" layoutY="309.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="82.0" style="-fx-background-color: #3E872B;" text="Login" textFill="WHITE">
+      <Label fx:id="loginError" layoutX="200.0" layoutY="275.0" prefHeight="17.0" prefWidth="354.0" textFill="#f44336">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="loginBtn" layoutX="132.0" layoutY="309.0" onAction="#LoginHandler" mnemonicParsing="false" prefHeight="39.0" prefWidth="82.0" style="-fx-background-color: #3E872B;" text="Login" textFill="WHITE">
          <font>
             <Font name="Imprint MT Shadow" size="15.0" />
          </font>
