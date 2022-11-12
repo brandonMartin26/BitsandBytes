@@ -10,9 +10,9 @@ public class Item {
         this.price = 0;
         this.pizzaTopping = "No topping";}
 
-    public Item(String pizzaType, String pizzaToppping, double price) {
+    public Item(String pizzaType, String pizzaTopping, double price) {
             this.pizzaType = pizzaType;
-            this.pizzaTopping = pizzaToppping;
+            this.pizzaTopping = pizzaTopping;
             this.price = price;
         }
 
@@ -39,4 +39,10 @@ public class Item {
         public void setPrice(double price) {
             this.price = price;
         }
+    @Override
+        public String toString() {
+            return pizzaType + ";" +
+                pizzaTopping + ";" +
+                String.format("%.2f", price);
+    }
     }

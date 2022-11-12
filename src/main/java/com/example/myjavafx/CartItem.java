@@ -40,4 +40,8 @@ public class CartItem {
         return item.getPrice() * this.count;
     }
 
+    @Override
+    public String toString() {
+        return item + "," + count ;
+    }
 }

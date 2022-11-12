@@ -3,36 +3,47 @@ package com.example.myjavafx;
 import java.io.*;
 import java.util.ArrayList;
 
-public class OrderAPI {
-    String pathName = "Database/orderDB.csv";
+public final class OrderAPI {
+    static String pathName = "Database/orderDB.txt";
 
-    public ArrayList<Item> getOrderInfo() {
+    public static ArrayList<Order> getOrderInfo() {
         try{
             BufferedReader reader = new BufferedReader(new FileReader(pathName));
 
-            String line = reader.readLine();
-            ArrayList<Item> orderList = new ArrayList<Item>();
+            String line;
+            ArrayList<Order> orderList = new ArrayList<Order>();
             while ((line = reader.readLine()) != null) {
-                String[] detail = line.split(";");
-                Item newItem = new Item(detail[0].trim(), detail[1].trim(),
-                        Double.parseDouble(detail[3].trim()));
-                orderList.add(newItem);
+                String[] cartList = line.split("/");
+                Order newOrder = new Order();
+                for(String cartItemRaw : cartList) {
+                    String[] cartItemStr = cartItemRaw.split(",");
+                    String cartItem = cartItemStr[0];
+                    int count = Integer.parseInt(cartItemStr[1]);
+                    String[] itemStr = cartItem.split(";");
+                    Item newItem = new Item(itemStr[0], itemStr[1], Double.parseDouble(itemStr[2]));
+                    CartItem newCartItem = new CartItem(newItem, count);
+                    newOrder.addToOrder(newCartItem);
+                }
+                orderList.add(newOrder);
             }
             return orderList;
         } catch (Exception e){
-            System.out.print("error1");
-            return new ArrayList<Item>();
+            e.printStackTrace();
+            return new ArrayList<Order>();
         }
     }
-    public void saveData(ArrayList<Item> list){
+    public static void saveData(ArrayList<Order> orderList){
         try{
             FileWriter writer = new FileWriter(pathName);
-            for(Item object : list){
-                Item item = (Item) object;
-                writer.append((item.toStringOrderDB()) + "\n");
+            for(Order order : orderList){
+                System.out.println(order);
+                writer.append(order + "\n");
             }
+            writer.flush();
+            writer.close();
         } catch(Exception e){
-            System.out.print("error2");
+            e.printStackTrace();
         }
+
     }
 }
