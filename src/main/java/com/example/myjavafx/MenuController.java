@@ -273,10 +273,8 @@ public class MenuController {
                 break;
             }
         }
+    }// END "signUpSave(ActionEvent event) throws IOException"
 
-
-
-    }
 
     public void LoginHandler(ActionEvent event) throws IOException {
         if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty())
