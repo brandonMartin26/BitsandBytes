@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="419.0" prefWidth="560.0" style="-fx-background-color: #E43F5A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafx.MenuController">
    <children>
-      <ImageView fitHeight="426.0" fitWidth="431.0" layoutX="134.0" layoutY="-3.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="426.0" fitWidth="431.0" layoutX="134.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../Pictures/pizza.png" />
          </image>
@@ -45,7 +45,7 @@
       <TextField fx:id="lastName" layoutX="138.0" layoutY="139.0" promptText="Enter Last Name" />
       <TextField fx:id="asuEmail" layoutX="138.0" layoutY="225.0" promptText="Enter ASUuser@asu.edu" />
       <TextField fx:id="password" layoutX="139.0" layoutY="265.0" promptText="Enter ASU password" />
-      <Button fx:id="signUp" layoutX="139.0" layoutY="314.0" mnemonicParsing="false" onAction="#SignUpSaved" text="Sign Up!" />
+      <Button fx:id="signUp" layoutX="139.0" layoutY="314.0" mnemonicParsing="false" onAction="#signUpSave" text="Sign Up!" />
       <Button fx:id="backToLogin" layoutX="236.0" layoutY="314.0" mnemonicParsing="false" onAction="#switchToMemberLogin" text="Back to Login" />
       <Label fx:id="signUpError" layoutX="152.0" layoutY="369.0" prefHeight="17.0" prefWidth="354.0" textFill="#f2eded">
          <font>
