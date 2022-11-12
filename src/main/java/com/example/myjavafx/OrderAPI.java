@@ -36,7 +36,6 @@ public final class OrderAPI {
         try{
             FileWriter writer = new FileWriter(pathName);
             for(Order order : orderList){
-                System.out.println(order);
                 writer.append(order + "\n");
             }
             writer.flush();
