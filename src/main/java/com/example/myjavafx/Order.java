@@ -14,6 +14,8 @@ public class Order {
     public void removeFromOrder(CartItem cartItem){
         cartList.remove(cartList.indexOf(cartItem));
     }
+
+    public void clearOrder(){cartList.clear();}
     public ArrayList<CartItem> getCart(){
         return cartList;
     }

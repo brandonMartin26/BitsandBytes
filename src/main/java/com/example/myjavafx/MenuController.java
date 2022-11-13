@@ -89,6 +89,8 @@ public class MenuController {
 
     @FXML
     private Label topLabel;
+    @FXML
+    private Button clearOrderBtn;
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //END VARIABLES FOR MENU
 
@@ -190,19 +192,23 @@ public class MenuController {
     //START VARIABLES FOR PROCESSING
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     @FXML
-    private Label cookingLabel;
-
+    private Label yourOrderIsLabel;
     @FXML
-    private Label readyLabel;
-
+    private Label acceptedLabel;
     @FXML
     private Label readyToCookLabel;
-
     @FXML
-    private AnchorPane statusAnchor;
-
+    private Label cookingLabel;
     @FXML
-    private Label yourOrderIsLabel;
+    private Label readyLabel;
+    @FXML
+    private Button Label1;
+    @FXML
+    private Button Label2;
+    @FXML
+    private Button Label3;
+    @FXML
+    private Button Label4;
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //END VARIABLES FOR PROCESSING
 
@@ -210,7 +216,6 @@ public class MenuController {
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     @FXML
     private Button backToMenuTempBtn;
-
     @FXML
     private AnchorPane chefViewAnchor;
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -329,21 +334,17 @@ public class MenuController {
     public void populateCheckoutCart(){
         cartVbox.getChildren().clear();
         Boolean moreOrders = true;
-        System.out.println("Hello");
-        System.out.println(newOrder.toString());
         String tempOrder = newOrder.toString();
         while(moreOrders) {
             Label orderLabel = new Label();
             int iend = tempOrder.indexOf(";");
-            String pizzaType = tempOrder.substring(0, iend);
+            String pizzaType = tempOrder.substring(0,iend);
             tempOrder = tempOrder.replaceFirst("" + pizzaType + ";", "");
-            System.out.println("Pizza Type is: " + pizzaType + " :::: tempOrder is now: " + tempOrder);
             int iend2 = tempOrder.indexOf(";");
             String toppings = tempOrder.substring(0, iend2 + 1);
             toppings = toppings.replace("^", "\n\t");
             toppings = toppings.replace(";", "--------------------");
             tempOrder = tempOrder.replaceFirst("" + toppings + ";", "");
-            System.out.println("Toppings is: " + toppings + " :::: tempOrder is now: " + tempOrder);
             int iend3 = tempOrder.indexOf("/");
             if(iend3 == -1){
                 moreOrders = false;
@@ -351,31 +352,34 @@ public class MenuController {
             }
             else{
                 tempOrder = tempOrder.replace(tempOrder.substring(0,iend3+1), "");
-                System.out.println("There are more items..., tempOrder for next run is: " + tempOrder);
             }
-            orderLabel.setText("" + pizzaType + "\n\t" + toppings + "\n");
+            orderLabel.setText("* " + pizzaType + "\n\t" + toppings + "\n");
             cartVbox.getChildren().add(orderLabel);
+
         }
 
     }
+
+    public  void clearVBoxCart(ActionEvent event) throws IOException
+    {
+        newOrder.clearOrder();
+        cartVbox.getChildren().clear();
+    }
+
     public void populateFinalCheckoutCart(){
         checkoutCartVbox.getChildren().clear();
         Boolean moreOrders = true;
-        System.out.println("Hello");
-        System.out.println(newOrder.toString());
         String tempOrder = newOrder.toString();
         while(moreOrders) {
             Label orderLabel = new Label();
             int iend = tempOrder.indexOf(";");
             String pizzaType = tempOrder.substring(0, iend);
             tempOrder = tempOrder.replaceFirst("" + pizzaType + ";", "");
-            System.out.println("Pizza Type is: " + pizzaType + " :::: tempOrder is now: " + tempOrder);
             int iend2 = tempOrder.indexOf(";");
             String toppings = tempOrder.substring(0, iend2 + 1);
             toppings = toppings.replace("^", "\n\t");
             toppings = toppings.replace(";", "--------------------");
             tempOrder = tempOrder.replaceFirst("" + toppings + ";", "");
-            System.out.println("Toppings is: " + toppings + " :::: tempOrder is now: " + tempOrder);
             int iend3 = tempOrder.indexOf("/");
             if(iend3 == -1){
                 moreOrders = false;
@@ -383,13 +387,14 @@ public class MenuController {
             }
             else{
                 tempOrder = tempOrder.replace(tempOrder.substring(0,iend3+1), "");
-                System.out.println("There are more items..., tempOrder for next run is: " + tempOrder);
             }
-            orderLabel.setText("" + pizzaType + "\n\t" + toppings + "\n");
+            orderLabel.setText("  ->" + pizzaType + "\n\t" + toppings + "\n");
             checkoutCartVbox.getChildren().add(orderLabel);
         }
 
     }
+
+    // Brandon Signup ***********************************************
     public void signUpSave(ActionEvent event) throws IOException{
         if(firstName.getText().isEmpty()){ signUpError.setText("Please enter First Name!"); }
         else if(lastName.getText().isEmpty()){ signUpError.setText("Please Enter Last Name!"); }
@@ -430,6 +435,7 @@ public class MenuController {
     }// END "signUpSave(ActionEvent event) throws IOException"
 
 
+    // Ethan Login -*******************************************
     public void LoginHandler(ActionEvent event) throws IOException {
         if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty())
         {
@@ -466,6 +472,21 @@ public class MenuController {
             scanner.nextLine();
         }
         loginError.setText("Invalid username or password");
+    }
+
+
+    //Omar Processing Page********************************
+    public void makeLabel1Green(ActionEvent event) throws IOException {
+        acceptedLabel.setStyle("-fx-background-color: #3E872B;");
+    }
+    public void makeLabel2Green(ActionEvent event) throws IOException {
+        readyToCookLabel.setStyle("-fx-background-color: #3E872B;");
+    }
+    public void makeLabel3Green(ActionEvent event) throws IOException {
+        cookingLabel.setStyle("-fx-background-color: #3E872B;");
+    }
+    public void makeLabel4Green(ActionEvent event) throws IOException {
+        readyLabel.setStyle("-fx-background-color: #3E872B;");
     }
 }
 
