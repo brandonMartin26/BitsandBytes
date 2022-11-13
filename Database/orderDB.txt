@@ -1,3 +1,10 @@
-thin2;pepperoni2;12.57,2/thick2;cheese2;57.00,7/medium2;pineapple2;11.57,4/thin2;mushroom2;0.57,3/thin2;chicken2;0.07,1
-thin;pepperoni;12.57,2/thick;cheese;57.00,7/medium;pineapple;11.57,4/thin;mushroom;0.57,3/thin;chicken;0.07,1
-thin3;pepperoni3;12.57,2/thick2;cheese2;57.00,7/medium2;pineapple2;11.57,4/thin2;mushroom2;0.57,3/thin2;chicken2;0.07,1
+Pepperoni;Mushroom^Onion^;13.00,1/Pepperoni;Mushroom^Olives^;13.00,1
+Vegetable;Olives^ExtraCheese^;15.00,1/Pepperoni;Mushroom^Olives^ExtraCheese^;14.50,1/Cheese;Mushroom^Onion^Olives^ExtraCheese^;15.00,1
+Cheese;Mushroom^Onion^;12.00,1/Vegetable;Mushroom^Onion^Olives^;16.50,1/Cheese;Mushroom^Onion^Olives^ExtraCheese^;15.00,1/Pepperoni;Mushroom^Onion^Olives^ExtraCheese^;16.00,1/Vegetable;Mushroom^Olives^ExtraCheese^;16.50,1
+Cheese;Onion^Olives^;12.00,1
+Vegetable;Onion^;13.50,1
+Pepperoni;Olives^;11.50,1
+Cheese;ExtraCheese^;10.50,1/Cheese;ExtraCheese^;10.50,1
+Cheese;;9.00,1/Cheese;Onion^Olives^;12.00,1
+Vegetable;Onion^;13.50,1
+Cheese;Olives^ExtraCheese^;12.00,1

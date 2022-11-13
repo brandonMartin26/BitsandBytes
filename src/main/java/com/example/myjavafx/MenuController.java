@@ -6,22 +6,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MenuController {
@@ -34,6 +28,38 @@ public class MenuController {
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //BEGIN VARIABLES FOR MENU
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    static ArrayList<Order> orderList = OrderAPI.getOrderInfo();
+    static Order newOrder = new Order();
+    @FXML
+    private Button addToOrderBtn;
+
+    @FXML
+    private RadioButton cheeseRadio;
+
+    @FXML
+    private CheckBox exCheeseCheckbox;
+
+    @FXML
+    private CheckBox mushCheckbox;
+
+    @FXML
+    private VBox cartVbox;
+    @FXML
+    private CheckBox olivesCheckbox;
+
+    @FXML
+    private CheckBox onionCheckbox;
+
+    @FXML
+    private RadioButton pepRadio;
+
+    @FXML
+    private ToggleGroup pizzaTypes;
+
+    @FXML
+    private RadioButton vegRadio;
+
     @FXML
     private GridPane cartGridPane;
 
@@ -126,6 +152,9 @@ public class MenuController {
     private GridPane asuIDPane;
 
     @FXML
+    private VBox checkoutCartVbox;
+
+    @FXML
     private TextField asuIdField;
 
     @FXML
@@ -154,6 +183,7 @@ public class MenuController {
 
     @FXML
     private Label totalLabel;
+
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //END VARIABLES FOR CHECKOUT
 
@@ -189,6 +219,8 @@ public class MenuController {
 
 
     public void switchToMemberLogin(ActionEvent event) throws IOException {
+        orderList.add(newOrder);
+        OrderAPI.saveData(orderList);
         root = FXMLLoader.load(getClass().getResource("memberLogin.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -213,11 +245,13 @@ public class MenuController {
     }
 
     public void switchToCheckout(ActionEvent event) throws IOException {
+        System.out.println(newOrder.toString());
         root = FXMLLoader.load(getClass().getResource("checkoutPage.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        populateFinalCheckoutCart();
     }
 
     public void switchToProcessing(ActionEvent event) throws IOException {
@@ -236,6 +270,126 @@ public class MenuController {
         stage.show();
     }
 
+    public void addToOrder(ActionEvent event) throws IOException {
+        String toppings = "";
+        String type = "";
+        double price = 0.00;
+        if(pepRadio.isSelected()){
+            type = "Pepperoni";
+            price += 10.00;
+        }
+        else if(vegRadio.isSelected()){
+            type = "Vegetable";
+            price += 12.00;
+        }
+        else if(cheeseRadio.isSelected()){
+            type = "Cheese";
+            price += 9.00;
+        }
+        if(mushCheckbox.isSelected()){
+            toppings += "Mushroom^";
+            price += 1.50;
+        }
+        if(onionCheckbox.isSelected()){
+            toppings += "Onion^";
+            price += 1.50;
+        }
+        if(olivesCheckbox.isSelected()){
+            toppings += "Olives^";
+            price += 1.50;
+        }
+        if(exCheeseCheckbox.isSelected()){
+            toppings += "ExtraCheese^";
+            price += 1.50;
+        }
+        //toppings = toppings.substring(0,(toppings.length()));
+        Item newItem = new Item(type, toppings, price);
+        newItem.setPizzaType(type);
+        newOrder.addToOrder(new CartItem(newItem, 1));
+
+        System.out.println("ADDED NEW ITEM: " + type + ", " + toppings + ", " + price);
+        updateCart(newItem);
+    }
+
+    public void updateCart(Item newItem){
+        /*String tempOrder = newItem.toString();
+        Label orderLabel = new Label();
+        int iend = tempOrder.indexOf(";");
+        String pizzaType = tempOrder.substring(0, iend);
+        tempOrder = tempOrder.replace("" + pizzaType + ";", "");
+        int iend2 = tempOrder.indexOf(";");
+        tempOrder = tempOrder.replace("^", "\n\t");
+        String toppings = tempOrder.substring(0, iend2+1);
+        tempOrder = tempOrder.replace("" + toppings + ";", "");
+        orderLabel.setText("" + pizzaType + "\n\t" + toppings + "\n");
+        cartVbox.getChildren().add(orderLabel);*/
+        populateCheckoutCart();
+    }
+
+    public void populateCheckoutCart(){
+        cartVbox.getChildren().clear();
+        Boolean moreOrders = true;
+        System.out.println("Hello");
+        System.out.println(newOrder.toString());
+        String tempOrder = newOrder.toString();
+        while(moreOrders) {
+            Label orderLabel = new Label();
+            int iend = tempOrder.indexOf(";");
+            String pizzaType = tempOrder.substring(0, iend);
+            tempOrder = tempOrder.replaceFirst("" + pizzaType + ";", "");
+            System.out.println("Pizza Type is: " + pizzaType + " :::: tempOrder is now: " + tempOrder);
+            int iend2 = tempOrder.indexOf(";");
+            String toppings = tempOrder.substring(0, iend2 + 1);
+            toppings = toppings.replace("^", "\n\t");
+            toppings = toppings.replace(";", "--------------------");
+            tempOrder = tempOrder.replaceFirst("" + toppings + ";", "");
+            System.out.println("Toppings is: " + toppings + " :::: tempOrder is now: " + tempOrder);
+            int iend3 = tempOrder.indexOf("/");
+            if(iend3 == -1){
+                moreOrders = false;
+                tempOrder = tempOrder.replace(tempOrder, "");
+            }
+            else{
+                tempOrder = tempOrder.replace(tempOrder.substring(0,iend3+1), "");
+                System.out.println("There are more items..., tempOrder for next run is: " + tempOrder);
+            }
+            orderLabel.setText("" + pizzaType + "\n\t" + toppings + "\n");
+            cartVbox.getChildren().add(orderLabel);
+        }
+
+    }
+    public void populateFinalCheckoutCart(){
+        checkoutCartVbox.getChildren().clear();
+        Boolean moreOrders = true;
+        System.out.println("Hello");
+        System.out.println(newOrder.toString());
+        String tempOrder = newOrder.toString();
+        while(moreOrders) {
+            Label orderLabel = new Label();
+            int iend = tempOrder.indexOf(";");
+            String pizzaType = tempOrder.substring(0, iend);
+            tempOrder = tempOrder.replaceFirst("" + pizzaType + ";", "");
+            System.out.println("Pizza Type is: " + pizzaType + " :::: tempOrder is now: " + tempOrder);
+            int iend2 = tempOrder.indexOf(";");
+            String toppings = tempOrder.substring(0, iend2 + 1);
+            toppings = toppings.replace("^", "\n\t");
+            toppings = toppings.replace(";", "--------------------");
+            tempOrder = tempOrder.replaceFirst("" + toppings + ";", "");
+            System.out.println("Toppings is: " + toppings + " :::: tempOrder is now: " + tempOrder);
+            int iend3 = tempOrder.indexOf("/");
+            if(iend3 == -1){
+                moreOrders = false;
+                tempOrder = tempOrder.replace(tempOrder, "");
+            }
+            else{
+                tempOrder = tempOrder.replace(tempOrder.substring(0,iend3+1), "");
+                System.out.println("There are more items..., tempOrder for next run is: " + tempOrder);
+            }
+            orderLabel.setText("" + pizzaType + "\n\t" + toppings + "\n");
+            checkoutCartVbox.getChildren().add(orderLabel);
+        }
+
+    }
     public void signUpSave(ActionEvent event) throws IOException{
         if(firstName.getText().isEmpty()){ signUpError.setText("Please enter First Name!"); }
         else if(lastName.getText().isEmpty()){ signUpError.setText("Please Enter Last Name!"); }
