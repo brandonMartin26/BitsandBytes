@@ -585,6 +585,21 @@ public class MenuController {
         }
     }
 
+    public void refreshStatus(ActionEvent event) throws InterruptedException {
+        int temp = orderList.get(0).status;
+        if(temp == 1){
+            acceptedLabel.setStyle("-fx-background-color: #3E872B;");
+            Thread.sleep(5000);
+            readyToCookLabel.setStyle("-fx-background-color: #3E872B;");
+        }
+        if(temp == 2){
+            cookingLabel.setStyle("-fx-background-color: #3E872B;");
+        }
+        if(temp == 3){
+            readyLabel.setStyle("-fx-background-color: #3E872B;");
+
+        }
+    }
 
 
 }
