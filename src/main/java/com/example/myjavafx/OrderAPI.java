@@ -13,8 +13,11 @@ public final class OrderAPI {
             String line;
             ArrayList<Order> orderList = new ArrayList<Order>();
             while ((line = reader.readLine()) != null) {
-                String[] cartList = line.split("/");
+                String[] rawOrder = line.split("&");
+                int orderStatus = Integer.parseInt(rawOrder[1]);
+                String[] cartList = rawOrder[0].split("/");
                 Order newOrder = new Order();
+                newOrder.status = orderStatus;
                 for(String cartItemRaw : cartList) {
                     String[] cartItemStr = cartItemRaw.split(",");
                     String cartItem = cartItemStr[0];
