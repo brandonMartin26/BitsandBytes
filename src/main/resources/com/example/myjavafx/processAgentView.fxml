@@ -15,6 +15,7 @@
       </Label>
       <ScrollPane layoutX="40.0" layoutY="80.0" prefHeight="260.0" prefWidth="532.0" />
       <Button fx:id="backToMenuTempBtn" layoutX="63.0" layoutY="352.0" mnemonicParsing="false" onAction="#switchToMenu" text="Accept Order" />
-      <Button layoutX="506.0" layoutY="352.0" mnemonicParsing="false" text="Logout" />
+      <Button fx:id="chefBtnPA" layoutX="502.0" layoutY="339.0" mnemonicParsing="false" onAction="#switchToChefView" text="Chef" />
+      <Button fx:id="orderUpdateBtnPA" layoutX="477.0" layoutY="364.0" mnemonicParsing="false" onAction="#switchToProcessing" text="Order Update" />
    </children>
 </AnchorPane>
