@@ -67,27 +67,6 @@ public class A6_ProcessAgentController {
     public void processingViewOrder(ActionEvent event) throws IOException {
         processingTextArea.clear();
         Boolean moreOrders = true;
-        /*String tempOrder = newOrder.toString();
-        while(moreOrders) {
-            Label orderLabel = new Label();
-            int iend = tempOrder.indexOf(";");
-            String pizzaType = tempOrder.substring(0, iend);
-            tempOrder = tempOrder.replaceFirst("" + pizzaType + ";", "");
-            int iend2 = tempOrder.indexOf(";");
-            String toppings = tempOrder.substring(0, iend2 + 1);
-            toppings = toppings.replace("^", "\n\t");
-            toppings = toppings.replace(";", "--------------------");
-            tempOrder = tempOrder.replaceFirst("" + toppings + ";", "");
-            int iend3 = tempOrder.indexOf("/");
-            if(iend3 == -1){
-                moreOrders = false;
-                tempOrder = tempOrder.replace(tempOrder, "");
-            }
-            else{
-                tempOrder = tempOrder.replace(tempOrder.substring(0,iend3+1), "");
-            }
-            processingTextArea.setText("" + pizzaType + "\n\t" + toppings + "\n");
-        }*/
     }
 
     public void refreshStatus(ActionEvent event) throws InterruptedException {

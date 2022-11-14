@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class A5_ProcessUpdateController {
     @FXML private Label yourOrderIsLabel;
@@ -18,10 +19,8 @@ public class A5_ProcessUpdateController {
     @FXML private Label readyToCookLabel;
     @FXML private Label cookingLabel;
     @FXML private Label readyLabel;
-    @FXML private Button Label1;
-    @FXML private Button Label2;
-    @FXML private Button Label3;
-    @FXML private Button Label4;
+    ArrayList<Order> orderList = OrderAPI.getOrderInfo();
+
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -34,25 +33,33 @@ public class A5_ProcessUpdateController {
         stage.show();
     }
 
-    public void switchToProcessing(ActionEvent event) throws IOException
+    public void switchToOrderProcessAgentView(ActionEvent event) throws IOException
     {
-        root = FXMLLoader.load(getClass().getResource("processingPage.fxml"));
+        root = FXMLLoader.load(getClass().getResource("b6_ProcessAgentView.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void makeLabel1Green(ActionEvent event) throws IOException {
-        acceptedLabel.setStyle("-fx-background-color: #3E872B;");
-    }
-    public void makeLabel2Green(ActionEvent event) throws IOException {
-        readyToCookLabel.setStyle("-fx-background-color: #3E872B;");
-    }
-    public void makeLabel3Green(ActionEvent event) throws IOException {
-        cookingLabel.setStyle("-fx-background-color: #3E872B;");
-    }
-    public void makeLabel4Green(ActionEvent event) throws IOException {
-        readyLabel.setStyle("-fx-background-color: #3E872B;");
+    public void refreshStatus(ActionEvent event) throws InterruptedException {
+        int temp = orderList.get(0).status;
+        System.out.println(orderList.get(0).status);
+        if(temp == 1){
+            acceptedLabel.setStyle("-fx-background-color: #3E872B;");
+            //Thread.sleep(5000);
+            readyToCookLabel.setStyle("-fx-background-color: #3E872B;");
+        }
+        if(temp == 2){
+            acceptedLabel.setStyle("-fx-background-color: #3E872B;");
+            readyToCookLabel.setStyle("-fx-background-color: #3E872B;");
+            cookingLabel.setStyle("-fx-background-color: #3E872B;");
+        }
+        if(temp == 3){
+            acceptedLabel.setStyle("-fx-background-color: #3E872B;");
+            readyToCookLabel.setStyle("-fx-background-color: #3E872B;");
+            cookingLabel.setStyle("-fx-background-color: #3E872B;");
+            readyLabel.setStyle("-fx-background-color: #3E872B;");
+        }
     }
 }

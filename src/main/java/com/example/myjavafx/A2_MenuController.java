@@ -35,7 +35,7 @@ public class A2_MenuController {
     public void switchToCheckout(ActionEvent event) throws IOException {
         newOrder.status = 0;
         orderList.add(newOrder);
-        root = FXMLLoader.load(getClass().getResource("checkoutPage.fxml"));
+        root = FXMLLoader.load(getClass().getResource("b3_CheckoutView.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
