@@ -35,6 +35,22 @@ public class A1_LoginController {
         stage.setScene(scene);
         stage.show();
     }
+    public void switchToChefView(ActionEvent event) throws IOException
+    {
+        root = FXMLLoader.load(getClass().getResource("b7_ChefView.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void switchToProcessAgentView(ActionEvent event) throws IOException
+    {
+        root = FXMLLoader.load(getClass().getResource("b6_ProcessAgentView.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
     public void switchToMenu(ActionEvent event) throws IOException
     {
         root = FXMLLoader.load(getClass().getResource("b2_MenuView.fxml"));
@@ -71,7 +87,14 @@ public class A1_LoginController {
                 if(password.equals(filePassword))
                 {
                     //can pass username to elsewhere here, if needed for other parts
-                    switchToMenu(event);
+                    if(username.equals("bvmarti3@asu.edu") || username.equals("omarh@asu.edu") ||username.equals("nhuh@asu.edu") ||username.equals("ethanh@asu.edu") || username.equals("andrewb@asu.edu"))
+                    {
+                        switchToChefView(event);
+                    } else if(username.equals("agent1@asu.edu") || username.equals("agent2@asu.edu") ||username.equals("agent3@asu.edu")) {
+                        switchToProcessAgentView(event);
+                    } else {
+                        switchToMenu(event);
+                    }
                 } else {
                     loginError.setText("Invalid username or password");
                     return;
