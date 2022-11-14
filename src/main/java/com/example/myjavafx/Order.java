@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 public class Order {
     ArrayList<CartItem> cartList;
+
     public Order(){
         cartList = new ArrayList<>();
-
     }
+
     public void addToOrder(CartItem cartItem){
         cartList.add(cartItem);
     }

@@ -9,7 +9,6 @@ public final class OrderAPI {
     public static ArrayList<Order> getOrderInfo() {
         try{
             BufferedReader reader = new BufferedReader(new FileReader(pathName));
-
             String line;
             ArrayList<Order> orderList = new ArrayList<Order>();
             while ((line = reader.readLine()) != null) {
