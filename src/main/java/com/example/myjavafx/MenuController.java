@@ -286,6 +286,8 @@ public class MenuController {
 
     public void switchToCheckout(ActionEvent event) throws IOException {
         System.out.println(newOrder.toString());
+        newOrder.status = 0;
+        orderList.add(newOrder);
         root = FXMLLoader.load(getClass().getResource("checkoutPage.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -294,9 +296,8 @@ public class MenuController {
     }
 
     public void switchToProcessing(ActionEvent event) throws IOException {
-        orderList.add(newOrder);
-
-        OrderAPI.saveData(orderList);
+        //newOrder.status = 0;
+        //orderList.add(newOrder);
         root = FXMLLoader.load(getClass().getResource("processingPage.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -598,6 +599,7 @@ public class MenuController {
 
     public void refreshStatus(ActionEvent event) throws InterruptedException {
         int temp = orderList.get(0).status;
+        System.out.println(orderList.get(0).status);
         if(temp == 1){
             acceptedLabel.setStyle("-fx-background-color: #3E872B;");
             //Thread.sleep(5000);

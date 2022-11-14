@@ -54,7 +54,7 @@
       <Button fx:id="L4" layoutX="498.0" layoutY="185.0" mnemonicParsing="false" onAction="#makeLabel4Green" text="update" />
       <Button fx:id="L3" layoutX="354.0" layoutY="185.0" mnemonicParsing="false" onAction="#makeLabel3Green" text="update" />
       <Button fx:id="L2" layoutX="200.0" layoutY="188.0" mnemonicParsing="false" onAction="#makeLabel2Green" text="update" />
-      <Button fx:id="processAgentOrderUpodateBtn" layoutX="471.0" layoutY="352.0" mnemonicParsing="false" onAction="#switchToProcessingAgent" text="Processing Agent" />
+      <Button fx:id="processAgentOrderUpdateBtn" layoutX="471.0" layoutY="352.0" mnemonicParsing="false" onAction="#switchToProcessingAgent" text="Processing Agent" />
       <Button fx:id="refreshOrder" layoutX="370.0" layoutY="250.0" mnemonicParsing="false" onAction="#refreshStatus" text="Refresh Order" />
    </children>
 </AnchorPane>
