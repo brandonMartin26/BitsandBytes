@@ -54,6 +54,7 @@ public class A2_LoginController {
         if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty())
         {
             loginError.setText("Please make sure all fields are full!");
+            return;
         }
         String fileName = "Database/users.txt";
         Scanner scanner = new Scanner(Paths.get(fileName), StandardCharsets.UTF_8.name());
@@ -75,12 +76,13 @@ public class A2_LoginController {
             {
                 if(password.equals(filePassword))
                 {
+
                     //can pass username to elsewhere here, if needed for other parts
                     switchToCheckout(event);
 
                 } else {
                     loginError.setText("Invalid username or password");
-                    break;
+                    return;
                 }
             }
             scanner.nextLine();
