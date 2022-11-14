@@ -1,14 +1,12 @@
 package com.example.myjavafx;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class BitsAndBytes extends Application {
     @Override
@@ -17,7 +15,7 @@ public class BitsAndBytes extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        OrderAPI.saveData(OrderAPI.getOrderInfo());
+        //OrderAPI.saveData(OrderAPI.getOrderInfo());
     }
 
 

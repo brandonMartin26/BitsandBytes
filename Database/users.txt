@@ -43,3 +43,6 @@
 333333333,nhuh@asu.edu,nhuChef#3,Nhu,Huynh
 444444444,ethenh@asu.edu,ethanChef#4,Ethan,Hubbard
 555555555,andrewb@asu.edu,andrewChef#5,Andrew,Byers
+666666666,agent1@asu.edu,agent1pass,Agent,One
+777777777,agent2@asu.edu,agent2pass,Agent,Two
+888888888,agent3@asu.edu,agent3pass,Agent,Three
