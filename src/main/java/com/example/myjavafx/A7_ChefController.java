@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class A5_ChefController {
+public class A7_ChefController {
     @FXML private Button backToMenuTempBtn, startOrderBtn, completeOrderBtn;
     @FXML private Label chefLabel;
     @FXML private ScrollPane chefScrollPane;
@@ -26,7 +26,7 @@ public class A5_ChefController {
 
     public void switchToMenu(ActionEvent event) throws IOException
     {
-        root = FXMLLoader.load(getClass().getResource("bitsandbytes.fxml"));
+        root = FXMLLoader.load(getClass().getResource("b2_MenuView.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

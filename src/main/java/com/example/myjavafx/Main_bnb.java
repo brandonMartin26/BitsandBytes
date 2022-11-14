@@ -8,10 +8,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class BitsAndBytes extends Application {
+public class Main_bnb extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("bitsandbytes.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("b1_LoginView.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

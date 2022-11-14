@@ -15,8 +15,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class A1_MenuController {
-    static ArrayList<Order> orderList = OrderAPI.getOrderInfo();
+public class A2_MenuController {
+    static ArrayList<Order> orderList = OrderAPI.getOrderInfo();;
     static Order newOrder = new Order();
     @FXML private Button addToOrderBtn, clearOrderBtn, checkoutBtn;
     @FXML private RadioButton cheeseRadio, pepRadio, vegRadio;
@@ -32,9 +32,10 @@ public class A1_MenuController {
     private Scene scene;
     private Parent root;
 
-    public void switchToMemberLogin(ActionEvent event) throws IOException
-    {
-        root = FXMLLoader.load(getClass().getResource("memberLogin.fxml"));
+    public void switchToCheckout(ActionEvent event) throws IOException {
+        newOrder.status = 0;
+        orderList.add(newOrder);
+        root = FXMLLoader.load(getClass().getResource("checkoutPage.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

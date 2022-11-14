@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class A7_SignupController {
+public class A4_SignupController {
     @FXML private Button signUp;
     @FXML private Button backToLogin;
     @FXML private TextField firstName;
@@ -37,7 +37,7 @@ public class A7_SignupController {
 
     public void switchToMemberLogin(ActionEvent event) throws IOException
     {
-        root = FXMLLoader.load(getClass().getResource("memberLogin.fxml"));
+        root = FXMLLoader.load(getClass().getResource("b1_LoginView.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

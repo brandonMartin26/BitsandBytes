@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class A4_ProcessUpdateController {
+public class A5_ProcessUpdateController {
     @FXML private Label yourOrderIsLabel;
     @FXML private Label acceptedLabel;
     @FXML private Label readyToCookLabel;
@@ -27,7 +27,7 @@ public class A4_ProcessUpdateController {
     private Parent root;
     public void switchToChefView(ActionEvent event) throws IOException
     {
-        root = FXMLLoader.load(getClass().getResource("chefView.fxml"));
+        root = FXMLLoader.load(getClass().getResource("b7_ChefView.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

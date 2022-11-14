@@ -49,7 +49,7 @@ public class A3_CheckoutController {
 
     public void switchToMenu(ActionEvent event) throws IOException
     {
-        root = FXMLLoader.load(getClass().getResource("bitsandbytes.fxml"));
+        root = FXMLLoader.load(getClass().getResource("b2_MenuView.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -58,7 +58,7 @@ public class A3_CheckoutController {
 
     public void switchToChefView(ActionEvent event) throws IOException
     {
-        root = FXMLLoader.load(getClass().getResource("chefView.fxml"));
+        root = FXMLLoader.load(getClass().getResource("b7_ChefView.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -67,7 +67,7 @@ public class A3_CheckoutController {
 
     public void switchToOrderProcessAgentView(ActionEvent event) throws IOException
     {
-        root = FXMLLoader.load(getClass().getResource("processAgentView.fxml"));
+        root = FXMLLoader.load(getClass().getResource("b6_ProcessAgentView.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -84,7 +84,7 @@ public class A3_CheckoutController {
             } else {
                 orderList.add(newOrder);
                 OrderAPI.saveData(orderList);
-                root = FXMLLoader.load(getClass().getResource("processingPage.fxml"));
+                root = FXMLLoader.load(getClass().getResource("b5_ProcessUpdateView.fxml"));
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);

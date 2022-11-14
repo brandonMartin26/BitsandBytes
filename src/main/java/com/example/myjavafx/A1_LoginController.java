@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-public class A2_LoginController {
+public class A1_LoginController {
     @FXML private Button contAsGuestBtn;
     @FXML private AnchorPane loginAnchor;
     @FXML private Button loginBtn;
@@ -35,15 +35,15 @@ public class A2_LoginController {
 
     public void switchToSignUp(ActionEvent event) throws IOException
     {
-        root = FXMLLoader.load(getClass().getResource("signUp.fxml"));
+        root = FXMLLoader.load(getClass().getResource("b4_SignupView.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-    public void switchToCheckout(ActionEvent event) throws IOException
+    public void switchToMenu(ActionEvent event) throws IOException
     {
-        root = FXMLLoader.load(getClass().getResource("checkoutPage.fxml"));
+        root = FXMLLoader.load(getClass().getResource("b2_MenuView.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -76,10 +76,8 @@ public class A2_LoginController {
             {
                 if(password.equals(filePassword))
                 {
-
                     //can pass username to elsewhere here, if needed for other parts
-                    switchToCheckout(event);
-
+                    switchToMenu(event);
                 } else {
                     loginError.setText("Invalid username or password");
                     return;
