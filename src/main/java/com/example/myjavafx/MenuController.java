@@ -218,6 +218,8 @@ public class MenuController {
     private Button Label3;
     @FXML
     private Button Label4;
+    @FXML
+    private Button refreshOrder;
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //END VARIABLES FOR PROCESSING
 
@@ -523,6 +525,14 @@ public class MenuController {
         readyLabel.setStyle("-fx-background-color: #3E872B;");
     }
 
+    public void startOrderHandler(ActionEvent event) throws IOException {
+        orderList.get(0).status = 2;
+    }
+
+    public void completeOrderHandler(ActionEvent event) throws IOException {
+        orderList.get(0).status = 3;
+    }
+
     public void updateChefView(ActionEvent event) throws IOException {
         Boolean moreOrders = true;
         String tempOrder = newOrder.toString();
@@ -549,15 +559,16 @@ public class MenuController {
         }
     }
 
-    public void selectOrderButtonPress(ActionEvent event) throws IOException {
+    /*public void selectOrderButtonPress(ActionEvent event) throws IOException {
         int i = 0;
         Order currentOrder = orderList.get(i);
         currentOrder.status = 1;
         //mess with order here
-    }
+    }*/
 
     public void processingAgentAccept(ActionEvent event) throws IOException {
-            processingTextArea.clear();
+        orderList.get(0).status = 1;
+        processingTextArea.clear();
     }
     public void processingViewOrder(ActionEvent event) throws IOException {
         processingTextArea.clear();
@@ -589,7 +600,7 @@ public class MenuController {
         int temp = orderList.get(0).status;
         if(temp == 1){
             acceptedLabel.setStyle("-fx-background-color: #3E872B;");
-            Thread.sleep(5000);
+            //Thread.sleep(5000);
             readyToCookLabel.setStyle("-fx-background-color: #3E872B;");
         }
         if(temp == 2){
