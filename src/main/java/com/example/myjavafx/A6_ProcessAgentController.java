@@ -54,11 +54,14 @@ public class A6_ProcessAgentController implements Initializable {
             orders.add(order);
             names.add(order.toString());
         }
-        processAgentListView.setItems(names);
+        processAgentListView.setItems(orders);
         processAgentListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
     public void processingAgentAccept(ActionEvent event) throws IOException {
         selectedOrder = (Order)processAgentListView.getSelectionModel().getSelectedItem();
+        if(selectedOrder == null) {
+            return;
+        }
         selectedOrder.status = 1;
         names.remove(processAgentListView.getSelectionModel().getSelectedIndex());
     }

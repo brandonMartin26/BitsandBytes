@@ -1,26 +1,29 @@
 package com.example.myjavafx;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class A7_ChefController {
+public class A7_ChefController implements Initializable {
     // FXML Variables
     @FXML private AnchorPane chefViewAnchor;
     @FXML private ScrollPane chefScrollPane;
-    @FXML private VBox displayOrder;
+    @FXML private ListView chefListView;
     @FXML private Button startOrderBtn, completeOrderBtn, orderUpdateBtnC, processAgentBtnC;
     @FXML private Label chefLabel;
     // Scene Variables
@@ -31,7 +34,17 @@ public class A7_ChefController {
     // Order Variables
     static ArrayList<Order> orderList = OrderAPI.getOrderInfo();
     static Order newOrder = new Order();
-
+    ObservableList<Order> orders = FXCollections.observableArrayList();
+    Order selectedOrder;
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        orders.clear();
+        for(Order order : orderList) {
+            orders.add(order);
+        }
+        chefListView.setItems(orders);
+        chefListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    }
 
     public void switchToProcessingAgent(ActionEvent event) throws IOException
     {
@@ -49,36 +62,18 @@ public class A7_ChefController {
         stage.show();
     }
     public void startOrderHandler(ActionEvent event) throws IOException {
-        orderList.get(0).status = 2;
+        selectedOrder = (Order)chefListView.getSelectionModel().getSelectedItem();
+        if(selectedOrder == null) {
+            return;
+        }
+        selectedOrder.status = 2;
     }
     public void completeOrderHandler(ActionEvent event) throws IOException {
-        orderList.get(0).status = 3;
-    }
-
-    public void updateChefView(ActionEvent event) throws IOException {
-        Boolean moreOrders = true;
-        String tempOrder = newOrder.toString();
-        while(moreOrders) {
-            Label orderLabel = new Label();
-            int iend = tempOrder.indexOf(";");
-            String pizzaType = tempOrder.substring(0, iend);
-            tempOrder = tempOrder.replaceFirst("" + pizzaType + ";", "");
-            int iend2 = tempOrder.indexOf(";");
-            String toppings = tempOrder.substring(0, iend2 + 1);
-            toppings = toppings.replace("^", "\n\t");
-            toppings = toppings.replace(";", "--------------------");
-            tempOrder = tempOrder.replaceFirst("" + toppings + ";", "");
-            int iend3 = tempOrder.indexOf("/");
-            if(iend3 == -1){
-                moreOrders = false;
-                tempOrder = tempOrder.replace(tempOrder, "");
-            }
-            else{
-                tempOrder = tempOrder.replace(tempOrder.substring(0,iend3+1), "");
-            }
-            orderLabel.setText("" + pizzaType + "\n\t" + toppings + "\n");
-            displayOrder.getChildren().add(orderLabel);
+        selectedOrder = (Order)chefListView.getSelectionModel().getSelectedItem();
+        if(selectedOrder == null) {
+            return;
         }
+        selectedOrder.status = 3;
     }
 
 }
