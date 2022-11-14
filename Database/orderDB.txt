@@ -10,3 +10,15 @@ Vegetable;Mushroom^Onion^;15.00,1&0
 Pepperoni;Mushroom^Onion^;13.00,1&0
 Pepperoni;Mushroom^Onion^;13.00,1&0
 Pepperoni;Mushroom^Onion^;13.00,1&0
+Vegetable;Mushroom^;13.50,1&0
+Vegetable;Mushroom^;13.50,1&0
+Vegetable;Mushroom^;13.50,1&0
+Vegetable;Mushroom^;13.50,1&0
+Vegetable;Mushroom^;13.50,1&0
+Vegetable;Mushroom^;13.50,1&0
+Vegetable;Mushroom^;13.50,1&0
+Pepperoni;Mushroom^;11.50,1&0
+Pepperoni;Mushroom^;11.50,1&0
+Vegetable;Mushroom^;13.50,1&0
+Vegetable;Mushroom^;13.50,1&0
+Vegetable;Onion^;13.50,1&0

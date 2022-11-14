@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.controlsfx.control.action.Action;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -201,7 +202,13 @@ public class MenuController {
     private Label cookingLabel;
 
     @FXML
+    private Button processLoadOrdersButton;
+
+    @FXML
     private Label readyLabel;
+
+    @FXML
+    private TextArea processingTextArea;
 
     @FXML
     private Button Label1;
@@ -217,7 +224,7 @@ public class MenuController {
     //START VARIABLES FOR CHEF VIEW
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     @FXML
-    private Button backToMenuTempBtn;
+    private Button acceptOrderButton;
 
     @FXML
     private RadioButton showOrder;
@@ -545,8 +552,41 @@ public class MenuController {
     public void selectOrderButtonPress(ActionEvent event) throws IOException {
         int i = 0;
         Order currentOrder = orderList.get(i);
+        currentOrder.status = 1;
         //mess with order here
     }
+
+    public void processingAgentAccept(ActionEvent event) throws IOException {
+            processingTextArea.clear();
+    }
+    public void processingViewOrder(ActionEvent event) throws IOException {
+        processingTextArea.clear();
+        Boolean moreOrders = true;
+        String tempOrder = newOrder.toString();
+        while(moreOrders) {
+            Label orderLabel = new Label();
+            int iend = tempOrder.indexOf(";");
+            String pizzaType = tempOrder.substring(0, iend);
+            tempOrder = tempOrder.replaceFirst("" + pizzaType + ";", "");
+            int iend2 = tempOrder.indexOf(";");
+            String toppings = tempOrder.substring(0, iend2 + 1);
+            toppings = toppings.replace("^", "\n\t");
+            toppings = toppings.replace(";", "--------------------");
+            tempOrder = tempOrder.replaceFirst("" + toppings + ";", "");
+            int iend3 = tempOrder.indexOf("/");
+            if(iend3 == -1){
+                moreOrders = false;
+                tempOrder = tempOrder.replace(tempOrder, "");
+            }
+            else{
+                tempOrder = tempOrder.replace(tempOrder.substring(0,iend3+1), "");
+            }
+            processingTextArea.setText("" + pizzaType + "\n\t" + toppings + "\n");
+        }
+    }
+
+
+
 }
 
 
