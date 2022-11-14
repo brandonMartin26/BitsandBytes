@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="chefViewAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BCBCBC;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafx.A6_ProcessAgentController">
+<AnchorPane fx:id="chefViewAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BCBCBC;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafx.A6_ProcessAgentController">
    <children>
-      <Label layoutX="134.0" layoutY="24.0" text="Orders to Process">
+      <Label fx:id="orderToProcessLabel" layoutX="134.0" layoutY="24.0" text="Orders to Process">
          <font>
             <Font name="Imprint MT Shadow" size="46.0" />
          </font>

@@ -33,8 +33,7 @@ public class A5_ProcessUpdateController {
         stage.show();
     }
 
-    public void switchToOrderProcessAgentView(ActionEvent event) throws IOException
-    {
+    public void switchToProcessingAgent(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("b6_ProcessAgentView.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -62,4 +61,6 @@ public class A5_ProcessUpdateController {
             readyLabel.setStyle("-fx-background-color: #3E872B;");
         }
     }
+
+
 }

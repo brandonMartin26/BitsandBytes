@@ -22,12 +22,9 @@ public class A1_LoginController {
     @FXML private Button contAsGuestBtn;
     @FXML private AnchorPane loginAnchor;
     @FXML private Button loginBtn;
-    @FXML private Label loginLabel;
-    @FXML private TextField usernameField;
-    @FXML private TextField passwordField;
-    @FXML private Label passwordLabel;
+    @FXML private TextField usernameField, passwordField;
+    @FXML private Label loginLabel, usernameLabel, passwordLabel;
     @FXML private Button signUpBtn;
-    @FXML private Label usernameLabel;
     @FXML private Label loginError;
     private Stage stage;
     private Scene scene;

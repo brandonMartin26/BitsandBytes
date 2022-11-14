@@ -23,7 +23,7 @@ public class A7_ChefController {
     @FXML private AnchorPane chefViewAnchor;
     @FXML private VBox displayOrder;
     static ArrayList<Order> orderList = OrderAPI.getOrderInfo();
-    Order newOrder = new Order();
+    static Order newOrder = new Order();
 
 
     private Stage stage;
