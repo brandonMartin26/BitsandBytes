@@ -34,6 +34,15 @@ public class A5_ProcessUpdateController {
         stage.show();
     }
 
+    public void switchToProcessing(ActionEvent event) throws IOException
+    {
+        root = FXMLLoader.load(getClass().getResource("processingPage.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void makeLabel1Green(ActionEvent event) throws IOException {
         acceptedLabel.setStyle("-fx-background-color: #3E872B;");
     }
