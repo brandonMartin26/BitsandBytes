@@ -9,14 +9,17 @@ public final class OrderAPI {
     public static ArrayList<Order> getOrderInfo() {
         try{
             BufferedReader reader = new BufferedReader(new FileReader(pathName));
+
             String line;
             ArrayList<Order> orderList = new ArrayList<Order>();
             while ((line = reader.readLine()) != null) {
-                String[] cartList = line.split("/");
+                String[] rawOrder = line.split("&");
+                int orderStatus = Integer.parseInt(rawOrder[1]);
+                String[] cartList = rawOrder[0].split("/");
                 Order newOrder = new Order();
+                newOrder.status = orderStatus;
                 for(String cartItemRaw : cartList) {
                     String[] cartItemStr = cartItemRaw.split(",");
-                    //System.out.println(cartItemStr[0] + " " + cartItemStr[1]);
                     String cartItem = cartItemStr[0];
                     int count = Integer.parseInt(cartItemStr[1]);
                     String[] itemStr = cartItem.split(";");
