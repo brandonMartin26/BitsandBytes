@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="statusAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BCBCBC;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafx.MenuController">
+<AnchorPane fx:id="statusAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BCBCBC;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" >
 
 
    <children>
@@ -50,10 +50,10 @@
 
 
       <Button fx:id="chefViewTempBtn" layoutX="504.0" layoutY="319.0" mnemonicParsing="false" onAction="#switchToChefView" text="Chef" />
-      <Button fx:id="L1" layoutX="49.0" layoutY="188.0" mnemonicParsing="false" onAction="#makeLabel1Green" text="update" />
-      <Button fx:id="L4" layoutX="498.0" layoutY="185.0" mnemonicParsing="false" onAction="#makeLabel4Green" text="update" />
-      <Button fx:id="L3" layoutX="354.0" layoutY="185.0" mnemonicParsing="false" onAction="#makeLabel3Green" text="update" />
-      <Button fx:id="L2" layoutX="200.0" layoutY="188.0" mnemonicParsing="false" onAction="#makeLabel2Green" text="update" />
+<!--      <Button fx:id="L1" layoutX="49.0" layoutY="188.0" mnemonicParsing="false" onAction="#makeAcceptedGreen" text="update" />-->
+<!--      <Button fx:id="L4" layoutX="498.0" layoutY="185.0" mnemonicParsing="false" onAction="#makeReadyToCookGreen" text="update" />-->
+<!--      <Button fx:id="L3" layoutX="354.0" layoutY="185.0" mnemonicParsing="false" onAction="#makeCookingGreen" text="update" />-->
+<!--      <Button fx:id="L2" layoutX="200.0" layoutY="188.0" mnemonicParsing="false" onAction="#makeReadyGreen" text="update" />-->
       <Button fx:id="processAgentOrderUpodateBtn" layoutX="471.0" layoutY="352.0" mnemonicParsing="false" onAction="#switchToProcessingAgent" text="Processing Agent" />
       <Button fx:id="refreshOrder" layoutX="370.0" layoutY="250.0" mnemonicParsing="false" onAction="#refreshStatus" text="Refresh Order" />
    </children>
