@@ -42,6 +42,8 @@ public class A3_CheckoutController {
 
     static ArrayList<Order> orderList = OrderAPI.getOrderInfo();
     static Order newOrder = new Order();
+    private ActionEvent event;
+    private String confirmedID;
 
 
 
@@ -53,24 +55,69 @@ public class A3_CheckoutController {
         stage.setScene(scene);
         stage.show();
     }
-    public void switchToProcessing(ActionEvent event) throws IOException
+
+    public void switchToChefView(ActionEvent event) throws IOException
     {
-        orderList.add(newOrder);
-        OrderAPI.saveData(orderList);
-        root = FXMLLoader.load(getClass().getResource("processingPage.fxml"));
+        root = FXMLLoader.load(getClass().getResource("chefView.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void switchToOrderProcessAgentView(ActionEvent event) throws IOException
+    {
+        root = FXMLLoader.load(getClass().getResource("processAgentView.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void switchToProcessing(ActionEvent event) throws IOException
+    {
+        this.event = event;
+        if(confirmID()) {
+            if(confirmedID.equals("111111111") || confirmedID.equals("222222222") || confirmedID.equals("333333333") || confirmedID.equals("444444444") || confirmedID.equals("555555555")) {
+                switchToChefView(event);
+            } else if(confirmedID.equals("666666666") || confirmedID.equals("777777777") || confirmedID.equals("888888888")) {
+                switchToOrderProcessAgentView(event);
+            } else {
+                orderList.add(newOrder);
+                OrderAPI.saveData(orderList);
+                root = FXMLLoader.load(getClass().getResource("processingPage.fxml"));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            }
+        } else {
+            asuIdField.setText("Invalid ASU ID!");
+        }
     }
     public void populateFinalCheckoutCart() throws IOException {
        String fileName = "Database/oderDB.txt";
        Scanner scanner = new Scanner(Paths.get(fileName), StandardCharsets.UTF_8.name());
        String data = scanner.useDelimiter("\\A").next();
        scanner.close();
+    }
 
-
-
-
+    public boolean confirmID() throws IOException{
+        String fileName = "Database/users.txt";
+        Scanner scanner = new Scanner(Paths.get(fileName), StandardCharsets.UTF_8.name());
+        scanner.useDelimiter(",");
+        String asuID = asuIdField.getText();
+        String fileID;
+        while(scanner.hasNextLine())
+        {
+            fileID = scanner.next();
+            if(asuID.equals(fileID)) //can change to fileID to login with ID instead of email
+            {
+                confirmedID = asuID;
+                return true;
+            } else {
+                scanner.nextLine();
+            }
+        }
+        return false;
     }
 }

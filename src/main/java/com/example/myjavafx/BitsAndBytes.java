@@ -15,7 +15,7 @@ public class BitsAndBytes extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        OrderAPI.saveData(OrderAPI.getOrderInfo());
+        //OrderAPI.saveData(OrderAPI.getOrderInfo());
     }
 
 

@@ -16,6 +16,7 @@ public final class OrderAPI {
                 Order newOrder = new Order();
                 for(String cartItemRaw : cartList) {
                     String[] cartItemStr = cartItemRaw.split(",");
+                    //System.out.println(cartItemStr[0] + " " + cartItemStr[1]);
                     String cartItem = cartItemStr[0];
                     int count = Integer.parseInt(cartItemStr[1]);
                     String[] itemStr = cartItem.split(";");
