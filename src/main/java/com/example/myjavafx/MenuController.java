@@ -220,7 +220,25 @@ public class MenuController {
     private Button backToMenuTempBtn;
 
     @FXML
+    private RadioButton showOrder;
+
+    @FXML
+    private RadioButton selectOrder;
+
+    @FXML
     private AnchorPane chefViewAnchor;
+
+    @FXML
+    private VBox displayOrder;
+
+    @FXML
+    private Button startOrderButton;
+    @FXML
+    private Button editOrderButton;
+
+    @FXML
+    private Button completeOrderButton;
+
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //END VARIABLES FOR CHEF VIEW
 
@@ -489,6 +507,38 @@ public class MenuController {
     }
     public void makeLabel4Green(ActionEvent event) throws IOException {
         readyLabel.setStyle("-fx-background-color: #3E872B;");
+    }
+
+    public void updateChefView(ActionEvent event) throws IOException {
+        Boolean moreOrders = true;
+        String tempOrder = newOrder.toString();
+        while(moreOrders) {
+            Label orderLabel = new Label();
+            int iend = tempOrder.indexOf(";");
+            String pizzaType = tempOrder.substring(0, iend);
+            tempOrder = tempOrder.replaceFirst("" + pizzaType + ";", "");
+            int iend2 = tempOrder.indexOf(";");
+            String toppings = tempOrder.substring(0, iend2 + 1);
+            toppings = toppings.replace("^", "\n\t");
+            toppings = toppings.replace(";", "--------------------");
+            tempOrder = tempOrder.replaceFirst("" + toppings + ";", "");
+            int iend3 = tempOrder.indexOf("/");
+            if(iend3 == -1){
+                moreOrders = false;
+                tempOrder = tempOrder.replace(tempOrder, "");
+            }
+            else{
+                tempOrder = tempOrder.replace(tempOrder.substring(0,iend3+1), "");
+            }
+            orderLabel.setText("" + pizzaType + "\n\t" + toppings + "\n");
+            displayOrder.getChildren().add(orderLabel);
+        }
+    }
+
+    public void selectOrderButtonPress(ActionEvent event) throws IOException {
+        int i = 0;
+        Order currentOrder = orderList.get(i);
+        //mess with order here
     }
 }
 
