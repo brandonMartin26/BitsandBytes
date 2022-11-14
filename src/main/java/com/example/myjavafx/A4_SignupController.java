@@ -22,13 +22,8 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class A4_SignupController {
-    @FXML private Button signUp;
-    @FXML private Button backToLogin;
-    @FXML private TextField firstName;
-    @FXML private TextField lastName;
-    @FXML private TextField asuID;
-    @FXML private TextField asuEmail;
-    @FXML private TextField password;
+    @FXML private Button signUp, backToLogin;
+    @FXML private TextField firstName, lastName, asuID, asuEmail, password;
     @FXML private Label signUpError;
 
     private Stage stage;

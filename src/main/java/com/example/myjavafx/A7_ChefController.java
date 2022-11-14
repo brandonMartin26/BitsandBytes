@@ -17,18 +17,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class A7_ChefController {
-    @FXML private Button backToMenuTempBtn, startOrderBtn, completeOrderBtn;
-    @FXML private Label chefLabel;
-    @FXML private ScrollPane chefScrollPane;
+    // FXML Variables
     @FXML private AnchorPane chefViewAnchor;
+    @FXML private ScrollPane chefScrollPane;
     @FXML private VBox displayOrder;
-    static ArrayList<Order> orderList = OrderAPI.getOrderInfo();
-    static Order newOrder = new Order();
-
-
+    @FXML private Button startOrderBtn, completeOrderBtn, orderUpdateBtnC, processAgentBtnC;
+    @FXML private Label chefLabel;
+    // Scene Variables
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    // Order Variables
+    static ArrayList<Order> orderList = OrderAPI.getOrderInfo();
+    static Order newOrder = new Order();
+
 
     public void switchToProcessingAgent(ActionEvent event) throws IOException
     {

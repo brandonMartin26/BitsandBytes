@@ -24,22 +24,22 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class A3_CheckoutController {
-    @FXML private GridPane asuIDPane;
+    //FXML Variables
+    @FXML private AnchorPane checkoutAnchor;
+    @FXML private GridPane checkoutCartGridPane, asuIDPane;
+
+    @FXML private ScrollPane checkoutCartScroll;
     @FXML private VBox checkoutCartVbox;
     @FXML private TextField asuIdField;
-    @FXML private Label asuIdLabel;
-    @FXML private Button backToMenuBtn;
-    @FXML private AnchorPane checkoutAnchor;
-    @FXML private GridPane checkoutCartGridPane;
-    @FXML private Label checkoutCartLabel;
-    @FXML private ScrollPane checkoutCartScroll;
-    @FXML private Label checkoutLabel;
-    @FXML private Button confirmOrderBtn;
-    @FXML private Label totalLabel;
+    @FXML private Label asuIdLabel, checkoutCartLabel, checkoutLabel, totalLabel;
+    @FXML private Button backToMenuBtn, confirmOrderBtn;
+
+    // Setting Variables
     private Stage stage;
     private Scene scene;
     private Parent root;
 
+    // Order Variables
     static ArrayList<Order> orderList = OrderAPI.getOrderInfo();
     static Order newOrder = new Order();
     private ActionEvent event;

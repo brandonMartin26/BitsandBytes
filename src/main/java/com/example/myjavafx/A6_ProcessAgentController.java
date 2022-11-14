@@ -15,15 +15,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class A6_ProcessAgentController {
+    //FXML Variables
     @FXML private Button processLoadOrdersBtn, acceptOrderButton, chefBtnPA,orderUpdateBtnPA;
     @FXML private Label orderToProcessLabel;
     @FXML private TextArea processingTextArea;
-
-    static Order newOrder = new Order();
-    ArrayList<Order> orderList = OrderAPI.getOrderInfo();
+    //Scene Variables
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    //Order Variables
+    static Order newOrder = new Order();
+    ArrayList<Order> orderList = OrderAPI.getOrderInfo();
 
     public void switchToChefView(ActionEvent event) throws IOException
     {

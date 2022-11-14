@@ -14,11 +14,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class A5_ProcessUpdateController {
-    @FXML private Label yourOrderIsLabel;
-    @FXML private Label acceptedLabel;
-    @FXML private Label readyToCookLabel;
-    @FXML private Label cookingLabel;
-    @FXML private Label readyLabel;
+
+    @FXML private Label yourOrderIsLabel, acceptedLabel, readyToCookLabel, cookingLabel, readyLabel;
+    @FXML private Button refreshOrder, chefViewTempBtn, processAgentOrderUpdateBtn;
     ArrayList<Order> orderList = OrderAPI.getOrderInfo();
 
     private Stage stage;

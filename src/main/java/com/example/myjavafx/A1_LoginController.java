@@ -19,13 +19,10 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class A1_LoginController {
-    @FXML private Button contAsGuestBtn;
     @FXML private AnchorPane loginAnchor;
-    @FXML private Button loginBtn;
+    @FXML private Button loginBtn, signUpBtn, contAsGuestBtn;
     @FXML private TextField usernameField, passwordField;
-    @FXML private Label loginLabel, usernameLabel, passwordLabel;
-    @FXML private Button signUpBtn;
-    @FXML private Label loginError;
+    @FXML private Label loginLabel, usernameLabel, passwordLabel, loginError;
     private Stage stage;
     private Scene scene;
     private Parent root;
