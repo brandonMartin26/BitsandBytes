@@ -42,7 +42,7 @@
                   <Font name="Imprint MT Shadow" size="14.0" />
                </font>
             </Button>
-            <VBox fx:id="cartVbox" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: white;" GridPane.rowIndex="1" />
+            <VBox fx:id="checkoutCartVbox" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: white;" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <Label fx:id="totalLabel" layoutX="259.0" layoutY="62.0" prefHeight="63.0" prefWidth="293.0" style="-fx-background-color: #3E872B;" text="Total:">
@@ -84,5 +84,6 @@
             </Button>
          </children>
       </GridPane>
+      <Button fx:id="loadOrdersBtn" layoutX="97.0" layoutY="27.0" mnemonicParsing="false" onAction="#populateFinalCheckoutCart" text="View Order" />
    </children>
 </AnchorPane>

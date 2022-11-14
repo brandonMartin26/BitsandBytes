@@ -1,2 +1,11 @@
-Pepperoni;Mushroom^;11.50,1/Vegetable;Mushroom^Onion^Olives^;16.50,1
-
+Pepperoni;Mushroom^Onion^;13.00,1/Pepperoni;Mushroom^Olives^;13.00,1
+Vegetable;Olives^ExtraCheese^;15.00,1/Pepperoni;Mushroom^Olives^ExtraCheese^;14.50,1/Cheese;Mushroom^Onion^Olives^ExtraCheese^;15.00,1
+Cheese;Mushroom^Onion^;12.00,1/Vegetable;Mushroom^Onion^Olives^;16.50,1/Cheese;Mushroom^Onion^Olives^ExtraCheese^;15.00,1/Pepperoni;Mushroom^Onion^Olives^ExtraCheese^;16.00,1/Vegetable;Mushroom^Olives^ExtraCheese^;16.50,1
+Cheese;Onion^Olives^;12.00,1
+Vegetable;Onion^;13.50,1
+Pepperoni;Olives^;11.50,1
+Cheese;ExtraCheese^;10.50,1/Cheese;ExtraCheese^;10.50,1
+Cheese;;9.00,1/Cheese;Onion^Olives^;12.00,1
+Vegetable;Onion^;13.50,1
+Cheese;Olives^ExtraCheese^;12.00,1
+Cheese;Onion^Olives^ExtraCheese^;13.50,1

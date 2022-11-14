@@ -199,8 +199,10 @@ public class MenuController {
     private Label readyToCookLabel;
     @FXML
     private Label cookingLabel;
+
     @FXML
     private Label readyLabel;
+
     @FXML
     private Button Label1;
     @FXML
@@ -216,6 +218,7 @@ public class MenuController {
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     @FXML
     private Button backToMenuTempBtn;
+
     @FXML
     private AnchorPane chefViewAnchor;
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -256,7 +259,6 @@ public class MenuController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        populateFinalCheckoutCart();
     }
 
     public void switchToProcessing(ActionEvent event) throws IOException {
@@ -353,7 +355,7 @@ public class MenuController {
             else{
                 tempOrder = tempOrder.replace(tempOrder.substring(0,iend3+1), "");
             }
-            orderLabel.setText("* " + pizzaType + "\n\t" + toppings + "\n");
+            orderLabel.setText("" + pizzaType + "\n\t" + toppings + "\n");
             cartVbox.getChildren().add(orderLabel);
 
         }
@@ -388,7 +390,7 @@ public class MenuController {
             else{
                 tempOrder = tempOrder.replace(tempOrder.substring(0,iend3+1), "");
             }
-            orderLabel.setText("  ->" + pizzaType + "\n\t" + toppings + "\n");
+            orderLabel.setText("" + pizzaType + "\n\t" + toppings + "\n");
             checkoutCartVbox.getChildren().add(orderLabel);
         }
 
@@ -435,7 +437,6 @@ public class MenuController {
     }// END "signUpSave(ActionEvent event) throws IOException"
 
 
-    // Ethan Login -*******************************************
     public void LoginHandler(ActionEvent event) throws IOException {
         if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty())
         {
