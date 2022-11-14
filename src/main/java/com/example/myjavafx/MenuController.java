@@ -593,15 +593,17 @@ public class MenuController {
             readyToCookLabel.setStyle("-fx-background-color: #3E872B;");
         }
         if(temp == 2){
+            acceptedLabel.setStyle("-fx-background-color: #3E872B;");
+            readyToCookLabel.setStyle("-fx-background-color: #3E872B;");
             cookingLabel.setStyle("-fx-background-color: #3E872B;");
         }
         if(temp == 3){
+            acceptedLabel.setStyle("-fx-background-color: #3E872B;");
+            readyToCookLabel.setStyle("-fx-background-color: #3E872B;");
+            cookingLabel.setStyle("-fx-background-color: #3E872B;");
             readyLabel.setStyle("-fx-background-color: #3E872B;");
-
         }
     }
-
-
 }
 
 
