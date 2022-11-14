@@ -261,6 +261,7 @@ public class MenuController {
 
     public void switchToProcessing(ActionEvent event) throws IOException {
         orderList.add(newOrder);
+
         OrderAPI.saveData(orderList);
         root = FXMLLoader.load(getClass().getResource("processingPage.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
