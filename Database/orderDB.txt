@@ -9,3 +9,5 @@ Cheese;;9.00,1/Cheese;Onion^Olives^;12.00,1
 Vegetable;Onion^;13.50,1
 Cheese;Olives^ExtraCheese^;12.00,1
 Cheese;Onion^Olives^ExtraCheese^;13.50,1
+Cheese;Olives^;10.50,1
+Cheese;Mushroom^Onion^;12.00,1/Vegetable;Onion^Olives^;15.00,1
