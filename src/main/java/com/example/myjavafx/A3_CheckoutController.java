@@ -2,8 +2,10 @@
 package com.example.myjavafx;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,15 +17,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import java.util.Scanner;
+import com.example.myjavafx.A2_MenuController;
+
+import java.net.URL;
+import java.util.*;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class A3_CheckoutController {
+public class A3_CheckoutController implements Initializable {
     //FXML Variables
     @FXML
     private AnchorPane checkoutAnchor;
@@ -47,81 +51,90 @@ public class A3_CheckoutController {
     private Parent root;
 
     // Order Variables
-    static ArrayList<Order> orderList = OrderAPI.getOrderInfo();
-    static Order newOrder = new Order();
     private ActionEvent event;
     private String confirmedID;
 
-
-    public void switchToMenu(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("b2_MenuView.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToChefView(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("b7_ChefView.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToOrderProcessAgentView(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("b6_ProcessAgentView.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToProcessing(ActionEvent event) throws IOException {
-        this.event = event;
-        //TODO: Make sure confirmID checks the ID against the same username used to login.
-        if (confirmID()) {
-            /*if(confirmedID.equals("111111111") || confirmedID.equals("222222222") || confirmedID.equals("333333333") || confirmedID.equals("444444444") || confirmedID.equals("555555555")) {
-                switchToChefView(event);
-            } else if(confirmedID.equals("666666666") || confirmedID.equals("777777777") || confirmedID.equals("888888888")) {
-                switchToOrderProcessAgentView(event);
-            } else {*/
-            orderList.add(newOrder);
-            OrderAPI.saveData(orderList);
-            root = FXMLLoader.load(getClass().getResource("b5_ProcessUpdateView.fxml"));
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } else {
-            asuIdField.setText("Invalid ASU ID!");
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        //todo update vbox with orders
+        //A2_MenuController controller = FXMLLoader(getClass().getResource("b2_MenuView.fxml"));
+        A2_MenuController a2controller;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("b2_MenuView.fxml"));
+            root = loader.load();
+            a2controller = loader.getController();
+            newOrders = a2controller.getNewOrders();
+            for(String order : newOrders)
+            {
+                Label checkoutCartLabel = new Label();
+                checkoutCartLabel.wrapTextProperty().setValue(true);
+                checkoutCartLabel.setMaxWidth(100);
+                checkoutCartLabel.setText(order);
+                System.out.println(order);
+                checkoutCartVbox.getChildren().add(checkoutCartLabel);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    }
-
-    public void populateFinalCheckoutCart() throws IOException {
-       String fileName = "Database/oderDB.txt";
-       Scanner scanner = new Scanner(Paths.get(fileName), StandardCharsets.UTF_8.name());
-       String data = scanner.useDelimiter("\\A").next();
-       scanner.close();
-    }
-
-    public boolean confirmID() throws IOException{
+            backToMenuBtn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    try {
+                        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("b2_MenuView.fxml")));
+                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            /*confirmOrderBtn.setOnAction(new EventHandler<ActionEvent>() {
+                @                   if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty())
+        {
+            loginError.setText("Please make sure all fields are full!");
+        }
         String fileName = "Database/users.txt";
         Scanner scanner = new Scanner(Paths.get(fileName), StandardCharsets.UTF_8.name());
         scanner.useDelimiter(",");
-        String asuID = asuIdField.getText();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
         String fileID;
+        String fileEmail;
+        String filePassword;
+
         while(scanner.hasNextLine())
         {
             fileID = scanner.next();
-            if(asuID.equals(fileID)) //can change to fileID to login with ID instead of email
+            fileEmail = scanner.next();
+            filePassword = scanner.next();
+            loginError.setText(fileEmail);
+
+            if(username.equals(fileEmail)) //can change to fileID to login with ID instead of email
             {
-                confirmedID = asuID;
-                return true;
-            } else {
-                scanner.nextLine();
+                if(password.equals(filePassword))
+                {
+                    //can pass username to elsewhere here, if needed for other parts
+                    switchToCheckout(event);
+
+                } else {
+                    loginError.setText("Invalid username or password");
+                    break;
+                }
             }
+            scanner.nextLine();
         }
-        return false;
+        loginError.setText("Invalid username or password");
+                public void handle(ActionEvent event) {
+                    try {
+                    1.check if login matches database
+                    2.change to process update view fxml. if not --> error
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });*/
     }
 }

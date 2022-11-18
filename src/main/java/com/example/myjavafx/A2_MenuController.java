@@ -1,8 +1,15 @@
 package com.example.myjavafx;
 
+import com.example.myjavafx.core.api.OrderApi;
+import com.example.myjavafx.core.api.OrderApiImpl;
+import com.example.myjavafx.core.models.PizzaRecord;
+import com.example.myjavafx.core.models.enums.PizzaType;
+import com.example.myjavafx.core.models.enums.Topping;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,110 +19,156 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.ResourceBundle;
+import com.example.myjavafx.core.api.OrderApi;
+import com.example.myjavafx.core.api.OrderApiImpl;
+import com.example.myjavafx.core.models.OrderRecord;
+import com.example.myjavafx.core.models.PizzaRecord;
+import com.example.myjavafx.core.models.enums.OrderStatus;
 
-public class A2_MenuController {
-    static ArrayList<Order> orderList = OrderAPI.getOrderInfo();;
-    static Order newOrder = new Order();
-    @FXML private Button addToOrderBtn, clearOrderBtn, checkoutBtn;
-    @FXML private RadioButton cheeseRadio, pepRadio, vegRadio;
-    @FXML private CheckBox exCheeseCheckbox, mushCheckbox, olivesCheckbox, onionCheckbox;
-    @FXML private ToggleGroup pizzaTypes;
-    @FXML private VBox cartVbox;
-    @FXML private GridPane cartGridPane, menuGridPane, menuItemsGridPane;
-    @FXML private Label cartLabel, menuLabel, topLabel;
-    @FXML private ScrollPane cartScroll;
-    @FXML private AnchorPane menuAnchor;
-    @FXML private TextField searchField;
+import static com.example.myjavafx.core.models.PizzaRecord.*;
+
+public class A2_MenuController implements Initializable {
+    @FXML
+    private Button addToOrderBtn, clearOrderBtn, checkoutBtn;
+    @FXML
+    private RadioButton cheeseRadio, pepRadio, vegRadio;
+    @FXML
+    private CheckBox exCheeseCheckbox, mushCheckbox, olivesCheckbox, onionCheckbox;
+    @FXML
+    private ToggleGroup pizzaTypes;
+    @FXML
+    private VBox cartVbox;
+    @FXML
+    private GridPane cartGridPane, menuGridPane, menuItemsGridPane;
+    @FXML
+    private Label cartLabel, menuLabel, topLabel;
+    @FXML
+    private ScrollPane cartScroll;
+    @FXML
+    private AnchorPane menuAnchor;
+    @FXML
+    private TextField searchField;
+
+    ActionEvent event;
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private OrderApi api;
+    private List<String> toppings = new ArrayList<>();
+    PizzaType pizzaType;
+    private List<String> newOrders = new ArrayList<>();
 
-    public void switchToCheckout(ActionEvent event) throws IOException {
-        newOrder.status = 0;
-        orderList.add(newOrder);
-        root = FXMLLoader.load(getClass().getResource("b3_CheckoutView.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        api = new OrderApiImpl();
+        //List<String> toppings = new ArrayList<>();
+        try {
+            addToOrderBtn.setOnAction(e -> {
+                if(pepRadio.isSelected() || cheeseRadio.isSelected() || vegRadio.isSelected()) {
+                    if (pepRadio.isSelected()) {
+                        pizzaType = PizzaType.PEPPERONI;
+                    } else if (vegRadio.isSelected()) {
+                        pizzaType = PizzaType.VEGETABLE;
+                    } else {
+                        pizzaType = PizzaType.CHEESE;
+                    }
+                    // Toppings
+                    if(exCheeseCheckbox.isSelected()||mushCheckbox.isSelected()||olivesCheckbox.isSelected()||onionCheckbox.isSelected()) {
+                        if (exCheeseCheckbox.isSelected()) {
+                            toppings.add(toppingToString(Topping.EXTRA_CHEESE));
+                        }
+                        if (mushCheckbox.isSelected()) {
+                            toppings.add(toppingToString(Topping.MUSHROOMS));
+                        }
+                        if (olivesCheckbox.isSelected()) {
+                            toppings.add(toppingToString(Topping.OLIVES));
+                        }
+                        if (onionCheckbox.isSelected()) {
+                            toppings.add(toppingToString(Topping.ONIONS));
+                        }
+                        Label orderLabel = new Label();
+                        orderLabel.wrapTextProperty().setValue(true);
+                        orderLabel.setMaxWidth(100);
+                        String finalOrder = pizzaTypeToString(pizzaType);
+                        for (String topping : toppings) {
+                            finalOrder += "\n\t" + topping;
+                        }
+                        orderLabel.setText(finalOrder);
+                        addNewOrder();
+                        cartVbox.getChildren().add(orderLabel);
+                        toppings.clear();
+                    }
+                    else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("No Toppings Selected");
+                        alert.setContentText("Please select at least one topping.");
+                        alert.showAndWait();
+                    }
+                }
+                else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("No Pizza Selected");
+                    alert.setContentText("Please select a pizza type");
+                    alert.showAndWait();
+                }
+            });
+            clearOrderBtn.setOnAction(e -> {
+                cartVbox.getChildren().clear();
+                newOrders.clear();
+            });
+            checkoutBtn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    try {
+                        if(!cartVbox.getChildren().isEmpty()) {
+                            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("b3_CheckoutView.fxml")));
+                            stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                            scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.show();
+                        }
+                        else{
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Error");
+                            alert.setHeaderText("No Pizzas In Cart");
+                            alert.setContentText("Please select a Pizza for Purchase");
+                            alert.showAndWait();
+                        }
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }
+            });
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void addNewOrder()
+    {
+        String newOrder = "0000;" + pizzaType.toString() + ";";
+        for(String topping : toppings)
+        {
+            newOrder += topping + ",";
+        }
+        newOrders.add(newOrder); //0000;Vegetable;Extra-Cheese,
+        System.out.println(newOrders.get(0));
+
     }
 
-    public void addToOrder(ActionEvent event) throws IOException
+    public List<String> getNewOrders()
     {
-        String toppings = " ";
-        String type = " ";
-        double price = 0.00;
-        if(pepRadio.isSelected()){
-            type = "Pepperoni";
-            price += 10.00;
-        }
-        else if(vegRadio.isSelected()){
-            type = "Vegetable";
-            price += 12.00;
-        }
-        else if(cheeseRadio.isSelected()){
-            type = "Cheese";
-            price += 9.00;
-        }
-        if(mushCheckbox.isSelected()){
-            toppings += "Mushroom^";
-            price += 1.50;
-        }
-        if(onionCheckbox.isSelected()){
-            toppings += "Onion^";
-            price += 1.50;
-        }
-        if(olivesCheckbox.isSelected()){
-            toppings += "Olives^";
-            price += 1.50;
-        }
-        if(exCheeseCheckbox.isSelected()){
-            toppings += "ExtraCheese^";
-            price += 1.50;
-        }
-        //toppings = toppings.substring(0,(toppings.length()));
-        Item newItem = new Item(type, toppings, price);
-        newItem.setPizzaType(type);
-        newOrder.addToOrder(new CartItem(newItem, 1));
-        updateCart(newItem);
-    }
-
-    public void updateCart(Item newItem)
-    { populateCheckoutCart(); }
-
-    public void populateCheckoutCart()
-    {
-        cartVbox.getChildren().clear();
-        Boolean moreOrders = true;
-        String tempOrder = newOrder.toString();
-        while(moreOrders) {
-            Label orderLabel = new Label();
-            int iend = tempOrder.indexOf(";");
-            String pizzaType = tempOrder.substring(0,iend);
-            tempOrder = tempOrder.replaceFirst("" + pizzaType + ";", "");
-            int iend2 = tempOrder.indexOf(";");
-            String toppings = tempOrder.substring(0, iend2 + 1);
-            toppings = toppings.replace("^", "\n\t");
-            toppings = toppings.replace(";", "--------------------");
-            tempOrder = tempOrder.replaceFirst("" + toppings + ";", "");
-            int iend3 = tempOrder.indexOf("/");
-            if(iend3 == -1){
-                moreOrders = false;
-                tempOrder = tempOrder.replace(tempOrder, "");
-            }
-            else{
-                tempOrder = tempOrder.replace(tempOrder.substring(0,iend3+1), "");
-            }
-            orderLabel.setText("" + pizzaType + "\n\t" + toppings + "\n");
-            cartVbox.getChildren().add(orderLabel);
-
-        }
-
-    }
-    public  void clearVBoxCart(ActionEvent event) throws IOException
-    {
-        newOrder.clearOrder();
-        cartVbox.getChildren().clear();
+        return newOrders;
     }
 }
