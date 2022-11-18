@@ -28,6 +28,8 @@ public class A5_ProcessUpdateController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        // color change "setupUpdate()" where
+        // updates periodically with a timer
+        // check if status is changed, if so, change color to that label
     }
 }

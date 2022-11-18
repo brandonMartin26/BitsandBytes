@@ -5,6 +5,7 @@ import com.example.myjavafx.core.api.OrderApiImpl;
 import com.example.myjavafx.core.models.PizzaRecord;
 import com.example.myjavafx.core.models.enums.PizzaType;
 import com.example.myjavafx.core.models.enums.Topping;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,17 +21,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
-import com.example.myjavafx.core.api.OrderApi;
-import com.example.myjavafx.core.api.OrderApiImpl;
-import com.example.myjavafx.core.models.OrderRecord;
-import com.example.myjavafx.core.models.PizzaRecord;
-import com.example.myjavafx.core.models.enums.OrderStatus;
+import java.util.*;
+
 
 import static com.example.myjavafx.core.models.PizzaRecord.*;
+import static com.example.myjavafx.core.models.PizzaUtils.pizzaRecordsToOrderList;
 
 public class A2_MenuController implements Initializable {
     @FXML
@@ -59,19 +54,40 @@ public class A2_MenuController implements Initializable {
     private Scene scene;
     private Parent root;
     private OrderApi api;
-    private List<String> toppings = new ArrayList<>();
-    PizzaType pizzaType;
-    private List<String> newOrders = new ArrayList<>();
+    private List<PizzaRecord> pizzas = new ArrayList<>();
 
+    private String orderId;
+
+
+    public void setOrder(CheckoutPayload payload) {
+        this.orderId = payload.orderId;
+        this.pizzas = payload.pizzas;
+    }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         api = new OrderApiImpl();
+        orderId = UUID.randomUUID().toString();
+        Platform.runLater(() -> {
+
+            for (String pizza : pizzaRecordsToOrderList(pizzas)) {
+                Label checkoutCartLabel = new Label();
+                checkoutCartLabel.wrapTextProperty().setValue(true);
+                checkoutCartLabel.setMaxWidth(100);
+                checkoutCartLabel.setText(pizza);
+                cartVbox.getChildren().add(checkoutCartLabel);
+            }
+        });
+
         //List<String> toppings = new ArrayList<>();
         try {
             addToOrderBtn.setOnAction(e -> {
-                if(pepRadio.isSelected() || cheeseRadio.isSelected() || vegRadio.isSelected()) {
+
+                ArrayList<Topping> toppings = new ArrayList<>();
+                PizzaType pizzaType = PizzaType.PLAIN;
+
+                if (pepRadio.isSelected() || cheeseRadio.isSelected() || vegRadio.isSelected()) {
                     if (pepRadio.isSelected()) {
                         pizzaType = PizzaType.PEPPERONI;
                     } else if (vegRadio.isSelected()) {
@@ -80,40 +96,37 @@ public class A2_MenuController implements Initializable {
                         pizzaType = PizzaType.CHEESE;
                     }
                     // Toppings
-                    if(exCheeseCheckbox.isSelected()||mushCheckbox.isSelected()||olivesCheckbox.isSelected()||onionCheckbox.isSelected()) {
+                    if (exCheeseCheckbox.isSelected()||mushCheckbox.isSelected()||olivesCheckbox.isSelected()||onionCheckbox.isSelected()) {
                         if (exCheeseCheckbox.isSelected()) {
-                            toppings.add(toppingToString(Topping.EXTRA_CHEESE));
+                            toppings.add(Topping.EXTRA_CHEESE);
                         }
                         if (mushCheckbox.isSelected()) {
-                            toppings.add(toppingToString(Topping.MUSHROOMS));
+                            toppings.add(Topping.MUSHROOMS);
                         }
                         if (olivesCheckbox.isSelected()) {
-                            toppings.add(toppingToString(Topping.OLIVES));
+                            toppings.add(Topping.OLIVES);
                         }
                         if (onionCheckbox.isSelected()) {
-                            toppings.add(toppingToString(Topping.ONIONS));
+                            toppings.add(Topping.ONIONS);
                         }
                         Label orderLabel = new Label();
                         orderLabel.wrapTextProperty().setValue(true);
                         orderLabel.setMaxWidth(100);
                         String finalOrder = pizzaTypeToString(pizzaType);
-                        for (String topping : toppings) {
-                            finalOrder += "\n\t" + topping;
+                        for (Topping topping : toppings) {
+                            finalOrder += "\n\t" + toppingToString(topping);
                         }
                         orderLabel.setText(finalOrder);
-                        addNewOrder();
                         cartVbox.getChildren().add(orderLabel);
-                        toppings.clear();
-                    }
-                    else {
+                        pizzas.add(new PizzaRecord(orderId, pizzaType, toppings));
+                    } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Error");
                         alert.setHeaderText("No Toppings Selected");
                         alert.setContentText("Please select at least one topping.");
                         alert.showAndWait();
                     }
-                }
-                else{
+                } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText("No Pizza Selected");
@@ -121,16 +134,22 @@ public class A2_MenuController implements Initializable {
                     alert.showAndWait();
                 }
             });
+
             clearOrderBtn.setOnAction(e -> {
                 cartVbox.getChildren().clear();
-                newOrders.clear();
+                pizzas.clear();
             });
+
             checkoutBtn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     try {
                         if(!cartVbox.getChildren().isEmpty()) {
-                            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("b3_CheckoutView.fxml")));
+
+                            final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("b3_CheckoutView.fxml"));
+                            Parent root = fxmlLoader.load();
+                            A3_CheckoutController checkoutController = fxmlLoader.getController();
+                            checkoutController.setCheckoutOrder(new CheckoutPayload(orderId, pizzas));
                             stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                             scene = new Scene(root);
                             stage.setScene(scene);
@@ -148,27 +167,8 @@ public class A2_MenuController implements Initializable {
                     }
                 }
             });
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-    public void addNewOrder()
-    {
-        String newOrder = "0000;" + pizzaType.toString() + ";";
-        for(String topping : toppings)
-        {
-            newOrder += topping + ",";
-        }
-        newOrders.add(newOrder); //0000;Vegetable;Extra-Cheese,
-        System.out.println(newOrders.get(0));
-
-    }
-
-    public List<String> getNewOrders()
-    {
-        return newOrders;
     }
 }

@@ -1,6 +1,8 @@
 
 package com.example.myjavafx;
 
+import com.example.myjavafx.core.models.PizzaRecord;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,6 +28,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.Scanner;
+
+import static com.example.myjavafx.core.models.PizzaUtils.pizzaRecordsToOrderList;
 
 public class A3_CheckoutController implements Initializable {
     //FXML Variables
@@ -54,33 +58,39 @@ public class A3_CheckoutController implements Initializable {
     private ActionEvent event;
     private String confirmedID;
 
+    private CheckoutPayload checkoutOrder;
+
+    public void setCheckoutOrder(CheckoutPayload payload) {
+        this.checkoutOrder = payload;
+    }
+
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //todo update vbox with orders
-        //A2_MenuController controller = FXMLLoader(getClass().getResource("b2_MenuView.fxml"));
-        A2_MenuController a2controller;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("b2_MenuView.fxml"));
-            root = loader.load();
-            a2controller = loader.getController();
-            newOrders = a2controller.getNewOrders();
-            for(String order : newOrders)
-            {
+        Platform.runLater(() -> {
+            //do stuff
+            System.out.println(checkoutOrder.pizzas.size());
+            pizzaRecordsToOrderList(checkoutOrder.pizzas).forEach(System.out::println);
+            for (String pizza : pizzaRecordsToOrderList(checkoutOrder.pizzas)) {
                 Label checkoutCartLabel = new Label();
                 checkoutCartLabel.wrapTextProperty().setValue(true);
                 checkoutCartLabel.setMaxWidth(100);
-                checkoutCartLabel.setText(order);
-                System.out.println(order);
+                checkoutCartLabel.setText(pizza);
                 checkoutCartVbox.getChildren().add(checkoutCartLabel);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-            backToMenuBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+        });
+
+        backToMenuBtn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     try {
-                        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("b2_MenuView.fxml")));
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("b2_MenuView.fxml"));
+                        Parent root = fxmlLoader.load();
+                        A2_MenuController menuController = fxmlLoader.getController();
+                        menuController.setOrder(checkoutOrder);
                         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         scene = new Scene(root);
                         stage.setScene(scene);
@@ -91,6 +101,10 @@ public class A3_CheckoutController implements Initializable {
                 }
             });
             /*confirmOrderBtn.setOnAction(new EventHandler<ActionEvent>() {
+            // todo: check id is valid, else error message
+            // todo: send order to DB
+            //  todo: move to updateView
+
                 @                   if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty())
         {
             loginError.setText("Please make sure all fields are full!");
