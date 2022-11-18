@@ -1,7 +1,10 @@
 
 package com.example.myjavafx;
 
+import com.example.myjavafx.core.api.OrderApi;
+import com.example.myjavafx.core.api.OrderApiImpl;
 import com.example.myjavafx.core.models.PizzaRecord;
+import com.example.myjavafx.core.models.enums.OrderStatus;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,10 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -59,6 +59,7 @@ public class A3_CheckoutController implements Initializable {
     private String confirmedID;
 
     private CheckoutPayload checkoutOrder;
+    private OrderApi api;
 
     public void setCheckoutOrder(CheckoutPayload payload) {
         this.checkoutOrder = payload;
@@ -100,55 +101,64 @@ public class A3_CheckoutController implements Initializable {
                     }
                 }
             });
-            /*confirmOrderBtn.setOnAction(new EventHandler<ActionEvent>() {
+
+        confirmOrderBtn.setOnAction(e -> {
             // todo: check id is valid, else error message
-            // todo: send order to DB
-            //  todo: move to updateView
-
-                @                   if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty())
-        {
-            loginError.setText("Please make sure all fields are full!");
-        }
-        String fileName = "Database/users.txt";
-        Scanner scanner = new Scanner(Paths.get(fileName), StandardCharsets.UTF_8.name());
-        scanner.useDelimiter(",");
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-        String fileID;
-        String fileEmail;
-        String filePassword;
-
-        while(scanner.hasNextLine())
-        {
-            fileID = scanner.next();
-            fileEmail = scanner.next();
-            filePassword = scanner.next();
-            loginError.setText(fileEmail);
-
-            if(username.equals(fileEmail)) //can change to fileID to login with ID instead of email
-            {
-                if(password.equals(filePassword))
+            api = new OrderApiImpl();
+            // todo: Scan "Users.txt" for ASU ID
+            String fileName = "Database/users.txt";
+            Scanner scanner = null;
+            try {
+                scanner = new Scanner(Paths.get(fileName), StandardCharsets.UTF_8);
+                scanner.useDelimiter(",");
+                String asuID = asuIdField.getText();
+                String fileID;
+                while(scanner.hasNextLine())
                 {
-                    //can pass username to elsewhere here, if needed for other parts
-                    switchToCheckout(event);
-
-                } else {
-                    loginError.setText("Invalid username or password");
-                    break;
-                }
-            }
-            scanner.nextLine();
-        }
-        loginError.setText("Invalid username or password");
-                public void handle(ActionEvent event) {
-                    try {
-                    1.check if login matches database
-                    2.change to process update view fxml. if not --> error
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    fileID = scanner.next();
+                    if(asuID.equals(fileID)) //can change to fileID to login with ID instead of email
+                    {
+                        confirmedID = asuID;
+                        break;
+                    } else {
+                        scanner.nextLine();
                     }
                 }
-            });*/
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+            if(confirmedID.equals(asuIdField.getText())) {
+                // todo: send order to DB
+                try {
+                    api.addOrder(checkoutOrder.orderId,checkoutOrder.pizzas);
+                    api.setOrderStatus(checkoutOrder.orderId, OrderStatus.CREATED);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                //  todo: move to updateView
+                try {
+                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("b5_ProcessUpdateView.fxml")));
+                    stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+            }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid ASU ID");
+                alert.setContentText("Please enter a valid ASU ID");
+                alert.showAndWait();
+            }
+
+        });
+
+
+
+
     }
 }

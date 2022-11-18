@@ -78,8 +78,6 @@ public class A6_ProcessAgentController implements Initializable {
                     try {
                         final String orderId = orderListView.getSelectionModel().getSelectedItem();
                         if (newStatus == OrderStatus.ACCEPTED) {
-                            //color change on "Accepted" Label
-
                             api.setOrderStatus(orderId, OrderStatus.READYTOCOOK);
                             orderListView.getSelectionModel().clearSelection();
                             orderPizzaDetailsListView.getItems().clear();

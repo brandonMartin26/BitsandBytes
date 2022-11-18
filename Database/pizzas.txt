@@ -94,3 +94,11 @@
 0099;Plain;None
 0100;Plain;Extra-Cheese
 0101;Plain;Olives
+100031;Pepperoni;Mushrooms,Olives,Onions
+100031;Pepperoni;Mushrooms,Onions
+100089;Pepperoni;Mushrooms,Olives,Onions
+100085;Vegetable;Extra-Cheese,Mushrooms
+100084;Pepperoni;Mushrooms,Olives,Onions
+100058;Cheese;Extra-Cheese,Olives,Onions
+100088;Pepperoni;Mushrooms
+100001;Pepperoni;Mushrooms,Onions
