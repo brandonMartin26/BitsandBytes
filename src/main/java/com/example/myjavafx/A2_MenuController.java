@@ -68,7 +68,7 @@ public class A2_MenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         api = new OrderApiImpl();
-        //orderId = UUID.randomUUID().toString();
+//        orderId = UUID.randomUUID().toString();
         Random randomId = new Random();
         HashSet<Integer> set = new HashSet<>();
         while (set.size() < 1) {
@@ -81,6 +81,7 @@ public class A2_MenuController implements Initializable {
             rand = Integer.toString(random1);
         }
         orderId = rand;
+        System.out.println("Order ID: " + orderId);
         Platform.runLater(() -> {
 
             for (String pizza : pizzaRecordsToOrderList(pizzas)) {

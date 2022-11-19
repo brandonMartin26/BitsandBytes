@@ -72,8 +72,7 @@ public class A3_CheckoutController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> {
             //do stuff
-            System.out.println(checkoutOrder.pizzas.size());
-            pizzaRecordsToOrderList(checkoutOrder.pizzas).forEach(System.out::println);
+            //pizzaRecordsToOrderList(checkoutOrder.pizzas).forEach(System.out::println);
             for (String pizza : pizzaRecordsToOrderList(checkoutOrder.pizzas)) {
                 Label checkoutCartLabel = new Label();
                 checkoutCartLabel.wrapTextProperty().setValue(true);
@@ -138,7 +137,10 @@ public class A3_CheckoutController implements Initializable {
                 }
                 //  todo: move to updateView
                 try {
-                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("b5_ProcessUpdateView.fxml")));
+                    FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("b5_ProcessUpdateView.fxml"));
+                    root = fxmlloader.load();
+                    A5_ProcessUpdateController processUpdateController = fxmlloader.getController();
+                    processUpdateController.setCheckoutOrder(checkoutOrder);
                     stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
                     scene = new Scene(root);
                     stage.setScene(scene);

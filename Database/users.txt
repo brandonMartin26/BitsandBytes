@@ -38,11 +38,11 @@
 547896325,euanb@asu.edu,w!B*iNe3KeexiBlx,Euan ,Blackstone
 965832569,jamesf,!2T&63dV&avHqL%T,James,Fink
 785423659,katelyng@asu.edu,0gH*Jho^SA$jrt52,Katelyn,Gosney
-111111111,bvmarti3@asu.edu,brandonChef#1,Brandon,Martin
-222222222,omarh@asu.edu,omarChef#2,Omar,Hernandez
-333333333,nhuh@asu.edu,nhuChef#3,Nhu,Huynh
-444444444,ethanh@asu.edu,ethanChef#4,Ethan,Hubbard
-555555555,andrewb@asu.edu,andrewChef#5,Andrew,Byers
-666666666,agent1@asu.edu,agent1pass,Agent,One
-777777777,agent2@asu.edu,agent2pass,Agent,Two
-888888888,agent3@asu.edu,agent3pass,Agent,Three
+111111111,chef1@asu.edu,chef1,Brandon,Martin
+222222222,chef2@asu.edu,chef2,Omar,Hernandez
+333333333,chef3@asu.edu,chef3,Nhu,Huynh
+444444444,chef4@asu.edu,chef4,Ethan,Hubbard
+555555555,chef5@asu.edu,chef5,Andrew,Byers
+666666666,agent1@asu.edu,agent1,Agent,One
+777777777,agent2@asu.edu,agent2,Agent,Two
+888888888,agent3@asu.edu,agent3,Agent,Three

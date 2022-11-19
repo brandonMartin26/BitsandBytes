@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -39,19 +40,25 @@ public class A5_ProcessUpdateController implements Initializable {
     OrderApi api;
     List<OrderRecord> orderRecords;
     private CheckoutPayload checkoutOrder;
+
+    private ScheduledExecutorService executor;
     public void setCheckoutOrder(CheckoutPayload payload) {
         this.checkoutOrder = payload;
     }
-
+    //todo: Follow instructions to pass payload from checkout[A3] to this controller
+    //todo: Also wrap in a do later function
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // color change "setupUpdate()" where
         // updates periodically with a timer
         // check if status is changed, if so, change color to that label
-        setupUpdater();
+        Platform.runLater(() -> {
+            startUpdater();
+        });
         chefViewTempBtn.setOnAction(event -> {
             try {
+                stopUpdater();
                 root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("b7_ChefView.fxml")));
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
@@ -63,6 +70,7 @@ public class A5_ProcessUpdateController implements Initializable {
         });
         processAgentOrderUpdateBtn.setOnAction(event -> {
             try {
+                stopUpdater();
                 root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("b6_ProcessAgentView.fxml")));
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);

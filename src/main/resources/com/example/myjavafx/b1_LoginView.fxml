@@ -25,8 +25,7 @@
       </Label>
       <TextField fx:id="usernameField" layoutX="225.0" layoutY="178.0" prefHeight="26.0" prefWidth="218.0" promptText="Enter ASU email..." />
       <TextField fx:id="passwordField" layoutX="225.0" layoutY="206.0" prefHeight="26.0" prefWidth="218.0" promptText="Enter ASU password..." />
-      <Button fx:id="contAsGuestBtn" layoutX="286.0" layoutY="322.0" mnemonicParsing="false" onAction="#switchToMenu" text="Tester(remove)" />
-      <Label fx:id="loginError" layoutX="225.0" layoutY="269.0" prefHeight="20.0" prefWidth="305.0" textFill="#f44336">
+      <Label fx:id="loginError" layoutX="229.0" layoutY="306.0" prefHeight="20.0" prefWidth="305.0" textFill="#f44336">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
