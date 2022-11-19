@@ -45,41 +45,58 @@ public class A5_ProcessUpdateController implements Initializable {
     public void setCheckoutOrder(CheckoutPayload payload) {
         this.checkoutOrder = payload;
     }
-    //todo: Follow instructions to pass payload from checkout[A3] to this controller
-    //todo: Also wrap in a do later function
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // color change "setupUpdate()" where
-        // updates periodically with a timer
-        // check if status is changed, if so, change color to that label
+
         Platform.runLater(() -> {
             startUpdater();
         });
-        chefViewTempBtn.setOnAction(event -> {
-            try {
-                stopUpdater();
-                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("b7_ChefView.fxml")));
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        processAgentOrderUpdateBtn.setOnAction(event -> {
-            try {
-                stopUpdater();
-                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("b6_ProcessAgentView.fxml")));
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+    }
 
+    private void stopUpdater() {
+        if (executor != null) {
+            executor.shutdownNow();
+        }
+    }
+
+    private void startUpdater() {
+        executor = Executors.newScheduledThreadPool(1);
+        Runnable loop = new Runnable() {
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override public void run() {
+                        try {
+                            api = new OrderApiImpl();
+                            System.out.println("----------");
+                            System.out.println("Thread: "+Thread.currentThread().getName());
+                            System.out.println("OrderId: " + (checkoutOrder != null ? checkoutOrder.orderId : "null"));
+                            OrderStatus orderStatus = api.getOrderStatus(checkoutOrder.orderId);
+                            String check = OrderRecord.orderStatusToString(api.getOrderStatus(checkoutOrder.orderId));
+                            //String check1 = api.getOrderStatus(checkoutOrder.orderId).toString();
+                            System.out.println("orderStatus: " + orderStatus);
+                            System.out.println("Order Status Check: " + check);
+                            System.out.println("Order Status accepted: " + OrderRecord.orderStatusToString(OrderStatus.ACCEPTED));
+                            System.out.println("Order Status readytocook: " + OrderRecord.orderStatusToString(OrderStatus.READYTOCOOK));
+                            if (check.equals(OrderRecord.orderStatusToString(OrderStatus.ACCEPTED))) {
+                                acceptedLabel.setStyle("-fx-background-color: #7CFC00");
+                            } else if (check.equals(OrderRecord.orderStatusToString(OrderStatus.READYTOCOOK))) {
+                                acceptedLabel.setStyle("-fx-background-color: #7CFC00");
+                                readyToCookLabel.setStyle("-fx-background-color: #7CFC00");
+                            } else if (check.equals(OrderRecord.orderStatusToString(OrderStatus.COOKING))) {
+                                cookingLabel.setStyle("-fx-background-color: #7CFC00");
+                            } else if (check.equals(OrderRecord.orderStatusToString(OrderStatus.READY))) {
+                                readyLabel.setStyle("-fx-background-color: #7CFC00");
+                            }else{
+                                System.out.println("Order has been Created");
+                            }
+                            System.out.println("----------");
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                });
+            }
+        };
+        executor.scheduleAtFixedRate(loop, 0, 1000, TimeUnit.MILLISECONDS);
     }
 }
