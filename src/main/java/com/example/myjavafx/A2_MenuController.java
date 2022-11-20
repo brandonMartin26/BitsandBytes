@@ -57,6 +57,11 @@ public class A2_MenuController implements Initializable {
     private List<PizzaRecord> pizzas = new ArrayList<>();
 
     private String orderId;
+    private LoginPayload loginPayload;
+    public void setLoginPayload(LoginPayload payload)
+    {
+        loginPayload = payload;
+    }
 
 
     public void setOrder(CheckoutPayload payload) {
@@ -162,6 +167,7 @@ public class A2_MenuController implements Initializable {
                             Parent root = fxmlLoader.load();
                             A3_CheckoutController checkoutController = fxmlLoader.getController();
                             checkoutController.setCheckoutOrder(new CheckoutPayload(orderId, pizzas));
+                            checkoutController.setLoginPayload(loginPayload);
                             stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                             scene = new Scene(root);
                             stage.setScene(scene);

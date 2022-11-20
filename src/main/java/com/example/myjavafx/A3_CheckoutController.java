@@ -60,11 +60,12 @@ public class A3_CheckoutController implements Initializable {
 
     private CheckoutPayload checkoutOrder;
     private OrderApi api;
+    private LoginPayload loginPayload;
 
     public void setCheckoutOrder(CheckoutPayload payload) {
         this.checkoutOrder = payload;
     }
-
+    public void setLoginPayload(LoginPayload payload) {this.loginPayload = payload;}
 
 
 
@@ -107,15 +108,18 @@ public class A3_CheckoutController implements Initializable {
             String fileName = "Database/users.txt";
             String asuID;
             Scanner scanner = null;
+            String confirmedUser = "INVALID";
             try {
                 scanner = new Scanner(Paths.get(fileName), StandardCharsets.UTF_8);
                 scanner.useDelimiter(",");
                 asuID = asuIdField.getText();
                 String fileID;
+                confirmedID="INVALID";
                 while(scanner.hasNextLine()) {
                     fileID = scanner.next();
                     if(asuID.equals(fileID)) {
                         confirmedID = asuID;
+                        confirmedUser = scanner.next();
                         break;
                     } else {
                         scanner.nextLine();
@@ -126,7 +130,7 @@ public class A3_CheckoutController implements Initializable {
             }
             //PRINT TEST:
 
-            if(confirmedID.equals(asuID)) {
+            if(confirmedUser.equals(loginPayload.userID)) {
                 // todo: send order to DB
                 try {
                     api.addOrder(checkoutOrder.orderId,checkoutOrder.pizzas);

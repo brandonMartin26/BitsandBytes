@@ -1,2 +1,4 @@
 0006;Vegetable;Extra-Cheese
 100018;Pepperoni;Mushrooms
+100021;Vegetable;Onions
+100082;Vegetable;Onions

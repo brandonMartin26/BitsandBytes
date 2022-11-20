@@ -32,6 +32,7 @@ public class A1_LoginController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private LoginPayload loginPayload;
 
     public void switchToSignUp(ActionEvent event) throws IOException
     {
@@ -98,7 +99,11 @@ public class A1_LoginController {
                     stage.setScene(scene);
                     stage.show();
                 }else{
-                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("b2_MenuView.fxml")));
+                    final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("b2_MenuView.fxml"));
+                    Parent root = fxmlLoader.load();
+                    A2_MenuController menuController = fxmlLoader.getController();
+                    loginPayload = new LoginPayload(username);
+                    menuController.setLoginPayload(loginPayload);
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
                     stage.setScene(scene);
