@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="checkoutAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BCBCBC;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafx.MenuController">
+<AnchorPane fx:id="checkoutAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BCBCBC;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafx.A3_CheckoutController">
    <children>
       <Label fx:id="checkoutLabel" layoutX="207.0" text="Checkout">
          <font>
@@ -37,7 +37,7 @@
                   <Font name="Imprint MT Shadow" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="backToMenuBtn" mnemonicParsing="false" onAction="#switchToMenu" text="Back To Menu" GridPane.rowIndex="2">
+            <Button fx:id="backToMenuBtn" mnemonicParsing="false" text="Back To Menu" GridPane.rowIndex="2">
                <font>
                   <Font name="Imprint MT Shadow" size="14.0" />
                </font>
@@ -74,7 +74,7 @@
                   <Insets bottom="40.0" left="20.0" right="20.0" />
                </GridPane.margin>
             </TextField>
-            <Button fx:id="confirmOrderBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToProcessing" style="-fx-background-color: #3E872B;" text="Confirm Order" GridPane.rowIndex="2">
+            <Button fx:id="confirmOrderBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: #3E872B;" text="Confirm Order" GridPane.rowIndex="2">
                <font>
                   <Font name="Imprint MT Shadow" size="24.0" />
                </font>
@@ -84,6 +84,5 @@
             </Button>
          </children>
       </GridPane>
-      <Button fx:id="loadOrdersBtn" layoutX="97.0" layoutY="27.0" mnemonicParsing="false" onAction="#populateFinalCheckoutCart" text="View Order" />
    </children>
 </AnchorPane>
