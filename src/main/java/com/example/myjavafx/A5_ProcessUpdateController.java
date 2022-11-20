@@ -67,16 +67,7 @@ public class A5_ProcessUpdateController implements Initializable {
                     @Override public void run() {
                         try {
                             api = new OrderApiImpl();
-                            System.out.println("----------");
-                            System.out.println("Thread: "+Thread.currentThread().getName());
-                            System.out.println("OrderId: " + (checkoutOrder != null ? checkoutOrder.orderId : "null"));
-                            OrderStatus orderStatus = api.getOrderStatus(checkoutOrder.orderId);
                             String check = OrderRecord.orderStatusToString(api.getOrderStatus(checkoutOrder.orderId));
-                            //String check1 = api.getOrderStatus(checkoutOrder.orderId).toString();
-                            System.out.println("orderStatus: " + orderStatus);
-                            System.out.println("Order Status Check: " + check);
-                            System.out.println("Order Status accepted: " + OrderRecord.orderStatusToString(OrderStatus.ACCEPTED));
-                            System.out.println("Order Status readytocook: " + OrderRecord.orderStatusToString(OrderStatus.READYTOCOOK));
                             if (check.equals(OrderRecord.orderStatusToString(OrderStatus.ACCEPTED))) {
                                 acceptedLabel.setStyle("-fx-background-color: #7CFC00");
                             } else if (check.equals(OrderRecord.orderStatusToString(OrderStatus.READYTOCOOK))) {
@@ -86,10 +77,7 @@ public class A5_ProcessUpdateController implements Initializable {
                                 cookingLabel.setStyle("-fx-background-color: #7CFC00");
                             } else if (check.equals(OrderRecord.orderStatusToString(OrderStatus.READY))) {
                                 readyLabel.setStyle("-fx-background-color: #7CFC00");
-                            }else{
-                                System.out.println("Order has been Created");
                             }
-                            System.out.println("----------");
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }

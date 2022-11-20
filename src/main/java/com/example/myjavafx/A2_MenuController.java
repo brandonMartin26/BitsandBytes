@@ -81,7 +81,6 @@ public class A2_MenuController implements Initializable {
             rand = Integer.toString(random1);
         }
         orderId = rand;
-        System.out.println("Order ID: " + orderId);
         Platform.runLater(() -> {
 
             for (String pizza : pizzaRecordsToOrderList(pizzas)) {
