@@ -72,7 +72,6 @@ public class A3_CheckoutController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> {
             //do stuff
-            //pizzaRecordsToOrderList(checkoutOrder.pizzas).forEach(System.out::println);
             for (String pizza : pizzaRecordsToOrderList(checkoutOrder.pizzas)) {
                 Label checkoutCartLabel = new Label();
                 checkoutCartLabel.wrapTextProperty().setValue(true);
@@ -106,17 +105,16 @@ public class A3_CheckoutController implements Initializable {
             api = new OrderApiImpl();
             // todo: Scan "Users.txt" for ASU ID
             String fileName = "Database/users.txt";
+            String asuID;
             Scanner scanner = null;
             try {
                 scanner = new Scanner(Paths.get(fileName), StandardCharsets.UTF_8);
                 scanner.useDelimiter(",");
-                String asuID = asuIdField.getText();
+                asuID = asuIdField.getText();
                 String fileID;
-                while(scanner.hasNextLine())
-                {
+                while(scanner.hasNextLine()) {
                     fileID = scanner.next();
-                    if(asuID.equals(fileID)) //can change to fileID to login with ID instead of email
-                    {
+                    if(asuID.equals(fileID)) {
                         confirmedID = asuID;
                         break;
                     } else {
@@ -126,8 +124,9 @@ public class A3_CheckoutController implements Initializable {
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
+            //PRINT TEST:
 
-            if(confirmedID.equals(asuIdField.getText())) {
+            if(confirmedID.equals(asuID)) {
                 // todo: send order to DB
                 try {
                     api.addOrder(checkoutOrder.orderId,checkoutOrder.pizzas);

@@ -33,8 +33,8 @@ public class A1_LoginController {
     private Scene scene;
     private Parent root;
 
-    public void switchToSignUp(ActionEvent event) throws IOException
-    {
+
+    public void switchToSignUp(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("b4_SignupView.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -84,10 +84,7 @@ public class A1_LoginController {
             scanner.nextLine();
 
 
-            System.out.println(fileID + ", " + fileEmail + ", " + filePassword + "\n");
-            System.out.println("------------------------");
             if(username.equals(fileEmail) && password.equals(filePassword)) {
-                System.out.println("Login Successful!");
                 if(username.equals("chef1@asu.edu") && password.equals("chef1") || username.equals("chef2@asu.edu") && password.equals("chef2") || username.equals("chef3@asu.edu") && password.equals("chef3") || username.equals("chef4@asu.edu") && password.equals("chef4") || username.equals("chef5@asu.edu") && password.equals("chef5")) {
                     root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("b7_ChefView.fxml")));
                     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

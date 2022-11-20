@@ -1,3 +1,4 @@
+000000000,user@asu.edu,usertest,First,Last
 9876543211,josh4@asu.edu,joshTempPass14!,Josh,Jones
 6549878321,kylea2@asu.edu,kyleAnderson234!,Kyle,Anderson
 985632478,jim3@asu.edu,jimTempPass34!,Jim,Johnson
