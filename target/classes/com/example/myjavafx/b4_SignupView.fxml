@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="419.0" prefWidth="560.0" style="-fx-background-color: #E43F5A;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafx.A4_SignupController">
+   <children>
+      <ImageView fitHeight="426.0" fitWidth="431.0" layoutX="134.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../Pictures/pizza.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="81.0" layoutY="14.0" prefHeight="59.0" prefWidth="397.0" text="Bits and Bytes Sign Up!">
+         <font>
+            <Font name="System Bold Italic" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="95.0" prefHeight="32.0" prefWidth="75.0" text="First Name: ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="136.0" prefHeight="32.0" prefWidth="67.0" text="Last Name:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="222.0" prefHeight="32.0" prefWidth="67.0" text="ASU Email: ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="262.0" prefHeight="32.0" prefWidth="67.0" text="Password: ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="firstName" layoutX="139.0" layoutY="98.0" promptText="Enter First Name" />
+      <TextField fx:id="lastName" layoutX="138.0" layoutY="139.0" promptText="Enter Last Name" />
+      <TextField fx:id="asuEmail" layoutX="138.0" layoutY="225.0" promptText="Enter ASUuser@asu.edu" />
+      <TextField fx:id="password" layoutX="139.0" layoutY="265.0" promptText="Enter ASU password" />
+      <Button fx:id="signUp" layoutX="139.0" layoutY="314.0" mnemonicParsing="false" onAction="#signUpSave" text="Sign Up!" />
+      <Button fx:id="backToLogin" layoutX="236.0" layoutY="314.0" mnemonicParsing="false" onAction="#switchToMemberLogin" text="Back to Login" />
+      <Label fx:id="signUpError" layoutX="152.0" layoutY="369.0" prefHeight="17.0" prefWidth="354.0" textFill="#f2eded">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect></Label>
+      <Label layoutX="58.0" layoutY="186.0" text="ASU ID: ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="asuID" layoutX="138.0" layoutY="182.0" promptText="Enter ASU ID" />
+   </children>
+</AnchorPane>
