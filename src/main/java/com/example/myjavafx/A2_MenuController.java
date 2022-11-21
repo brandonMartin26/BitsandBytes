@@ -28,42 +28,39 @@ import static com.example.myjavafx.core.models.PizzaRecord.*;
 import static com.example.myjavafx.core.models.PizzaUtils.pizzaRecordsToOrderList;
 
 public class A2_MenuController implements Initializable {
-    @FXML
-    private Button addToOrderBtn, clearOrderBtn, checkoutBtn;
-    @FXML
-    private RadioButton cheeseRadio, pepRadio, vegRadio;
-    @FXML
-    private CheckBox exCheeseCheckbox, mushCheckbox, olivesCheckbox, onionCheckbox;
-    @FXML
-    private ToggleGroup pizzaTypes;
-    @FXML
-    private VBox cartVbox;
-    @FXML
-    private GridPane cartGridPane, menuGridPane, menuItemsGridPane;
-    @FXML
-    private Label cartLabel, menuLabel, topLabel;
-    @FXML
-    private ScrollPane cartScroll;
-    @FXML
-    private AnchorPane menuAnchor;
-    @FXML
-    private TextField searchField;
-
-    ActionEvent event;
+    //********************** FXML Variables **********************\\
+    @FXML private Button addToOrderBtn, clearOrderBtn, checkoutBtn;
+    @FXML private RadioButton cheeseRadio, pepRadio, vegRadio;
+    @FXML private CheckBox exCheeseCheckbox, mushCheckbox, olivesCheckbox, onionCheckbox;
+    @FXML private ToggleGroup pizzaTypes;
+    @FXML private VBox cartVbox;
+    @FXML private GridPane cartGridPane, menuGridPane, menuItemsGridPane;
+    @FXML private Label cartLabel, menuLabel, topLabel;
+    @FXML private ScrollPane cartScroll;
+    @FXML private AnchorPane menuAnchor;
+    @FXML private TextField searchField;
+    //********************** Setting Variables **********************\\
     private Stage stage;
     private Scene scene;
     private Parent root;
+    //********************** Other Variables **********************\\
     private OrderApi api;
     private List<PizzaRecord> pizzas = new ArrayList<>();
 
     private String orderId;
     private LoginPayload loginPayload;
+
+    /**
+     *
+     */
     public void setLoginPayload(LoginPayload payload)
     {
         loginPayload = payload;
     }
 
-
+    /**
+     * This method is used to move the user info and order to the Checkout Controller.
+     */
     public void setOrder(CheckoutPayload payload) {
         this.orderId = payload.orderId;
         this.pizzas = payload.pizzas;
@@ -73,7 +70,7 @@ public class A2_MenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         api = new OrderApiImpl();
-//        orderId = UUID.randomUUID().toString();
+        // Creates random order id \\
         Random randomId = new Random();
         HashSet<Integer> set = new HashSet<>();
         while (set.size() < 1) {
@@ -86,8 +83,9 @@ public class A2_MenuController implements Initializable {
             rand = Integer.toString(random1);
         }
         orderId = rand;
-        Platform.runLater(() -> {
+        //-----------------------------//
 
+        Platform.runLater(() -> {
             for (String pizza : pizzaRecordsToOrderList(pizzas)) {
                 Label checkoutCartLabel = new Label();
                 checkoutCartLabel.wrapTextProperty().setValue(true);
@@ -97,10 +95,9 @@ public class A2_MenuController implements Initializable {
             }
         });
 
-        //List<String> toppings = new ArrayList<>();
         try {
+            // "addToOrderBtn" button action \\
             addToOrderBtn.setOnAction(e -> {
-
                 ArrayList<Topping> toppings = new ArrayList<>();
                 PizzaType pizzaType = PizzaType.PLAIN;
 
@@ -152,11 +149,13 @@ public class A2_MenuController implements Initializable {
                 }
             });
 
+            // "clearOrderBtn" button action \\
             clearOrderBtn.setOnAction(e -> {
                 cartVbox.getChildren().clear();
                 pizzas.clear();
             });
 
+            // "checkoutBtn" button action \\
             checkoutBtn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {

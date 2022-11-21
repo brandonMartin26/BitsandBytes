@@ -23,21 +23,15 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class A7_ChefController implements Initializable {
-
+    //********************** FXML Variables **********************\\
     // Left Side Panel
-    @FXML
-    private ListView<String> orderListView;
-
+    @FXML private ListView<String> orderListView;
     // Middle Panel
-    @FXML
-    private ListView<String> orderPizzaDetailsListView;
-
+    @FXML private ListView<String> orderPizzaDetailsListView;
     // ChoiceBox in Right Side Panel
-    @FXML
-    private ChoiceBox<String> orderStatusChoiceBox;
-
+    @FXML private ChoiceBox<String> orderStatusChoiceBox;
+    //*********************** Other Variables **********************\\
     private OrderApi api;
-
     List<OrderRecord> orderRecords;
     List<OrderStatus> chefOrderStatuses;
 
@@ -45,7 +39,6 @@ public class A7_ChefController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         api = new OrderApiImpl();
         chefOrderStatuses = Arrays.asList(OrderStatus.READYTOCOOK, OrderStatus.COOKING, OrderStatus.READY);
-
         try {
             // 1st pull records into "orderRecords"
             orderRecords = getOrderRecords();
@@ -63,7 +56,10 @@ public class A7_ChefController implements Initializable {
                     try {
                         final String orderId = orderListView.getSelectionModel().getSelectedItem();
                         if (newStatus == OrderStatus.READY) {
-                            api.removeOrder(orderId);
+                            //api.removeOrder(orderId);
+                            api.setOrderStatus(orderId, OrderRecord.orderStatusFromString(newValue));
+                            orderListView.getItems().remove(orderId);
+                            orderListView.getItems().remove(orderId);
                             orderListView.getSelectionModel().clearSelection();
                             orderPizzaDetailsListView.getItems().clear();
                             orderStatusChoiceBox.getSelectionModel().clearSelection();
@@ -86,10 +82,8 @@ public class A7_ChefController implements Initializable {
                     }
                 }
             });
-
             // Kickoff a periodic function which checks for changes to the database so we can update the view accordingly.
             setupUpdater();
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -116,7 +110,6 @@ public class A7_ChefController implements Initializable {
                                 final String selectedOrderId = orderListView.getSelectionModel().getSelectedItem();
                                 // Update Order List to updated List
                                 updateOrderList(updatedOrderRecords);
-
                                 final int indexOfSelectedOrder = orderListView.getItems().indexOf(selectedOrderId);
                                 orderListView.scrollTo(indexOfSelectedOrder);
                                 //(Magic)
@@ -161,12 +154,10 @@ public class A7_ChefController implements Initializable {
                 });
                 return stringBuilder.toString();
             }).toList();
-
             orderPizzaDetailsListView.getItems().setAll(pizzaItems);
             updateOrderChoiceBox();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-
 }

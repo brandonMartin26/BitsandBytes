@@ -30,13 +30,14 @@ import com.example.myjavafx.core.models.PizzaRecord;
 import com.example.myjavafx.core.models.enums.OrderStatus;
 
 public class A5_ProcessUpdateController implements Initializable {
-
+    //********************** FXML Variables **********************\\
     @FXML private Label yourOrderIsLabel, acceptedLabel, readyToCookLabel, cookingLabel, readyLabel;
     @FXML private Button refreshOrder, chefViewTempBtn, processAgentOrderUpdateBtn;
-
+    //********************** Setting Variables **********************\\
     private Stage stage;
     private Scene scene;
     private Parent root;
+    //********************** Order Variables **********************\\
     OrderApi api;
     List<OrderRecord> orderRecords;
     private CheckoutPayload checkoutOrder;
@@ -48,8 +49,10 @@ public class A5_ProcessUpdateController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
         Platform.runLater(() -> {
             startUpdater();
+
         });
     }
 
@@ -68,6 +71,7 @@ public class A5_ProcessUpdateController implements Initializable {
                         try {
                             api = new OrderApiImpl();
                             String check = OrderRecord.orderStatusToString(api.getOrderStatus(checkoutOrder.orderId));
+                            System.out.println(check);
                             if (check.equals(OrderRecord.orderStatusToString(OrderStatus.ACCEPTED))) {
                                 acceptedLabel.setStyle("-fx-background-color: #7CFC00");
                             } else if (check.equals(OrderRecord.orderStatusToString(OrderStatus.READYTOCOOK))) {
@@ -77,7 +81,11 @@ public class A5_ProcessUpdateController implements Initializable {
                                 cookingLabel.setStyle("-fx-background-color: #7CFC00");
                             } else if (check.equals(OrderRecord.orderStatusToString(OrderStatus.READY))) {
                                 readyLabel.setStyle("-fx-background-color: #7CFC00");
+                                //todo: someLabel.setText("Your order: " + checkoutOrderId.orderId + " is ready for pickup!");
+                                api.removeOrder(checkoutOrder.orderId);
+                                stopUpdater();
                             }
+
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }

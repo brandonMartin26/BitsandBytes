@@ -32,29 +32,22 @@ import java.util.Scanner;
 import static com.example.myjavafx.core.models.PizzaUtils.pizzaRecordsToOrderList;
 
 public class A3_CheckoutController implements Initializable {
-    //FXML Variables
-    @FXML
-    private AnchorPane checkoutAnchor;
-    @FXML
-    private GridPane checkoutCartGridPane, asuIDPane;
+    //********************** FXML Variables **********************\\
+    @FXML private AnchorPane checkoutAnchor;
+    @FXML private GridPane checkoutCartGridPane, asuIDPane;
 
-    @FXML
-    private ScrollPane checkoutCartScroll;
-    @FXML
-    private VBox checkoutCartVbox;
-    @FXML
-    private TextField asuIdField;
-    @FXML
-    private Label asuIdLabel, checkoutCartLabel, checkoutLabel, totalLabel;
-    @FXML
-    private Button backToMenuBtn, confirmOrderBtn;
+    @FXML private ScrollPane checkoutCartScroll;
+    @FXML private VBox checkoutCartVbox;
+    @FXML private TextField asuIdField;
+    @FXML private Label asuIdLabel, checkoutCartLabel, checkoutLabel, totalLabel;
+    @FXML private Button backToMenuBtn, confirmOrderBtn;
 
-    // Setting Variables
+    //********************** Setting Variables **********************\\
     private Stage stage;
     private Scene scene;
     private Parent root;
 
-    // Order Variables
+    //********************** Order Variables **********************\\
     private ActionEvent event;
     private String confirmedID;
 
@@ -83,6 +76,7 @@ public class A3_CheckoutController implements Initializable {
 
         });
 
+        // "backToMenuBtn" button action \\
         backToMenuBtn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -101,10 +95,9 @@ public class A3_CheckoutController implements Initializable {
                 }
             });
 
+        // "confirmOrderBtn" button action \\
         confirmOrderBtn.setOnAction(e -> {
-            // todo: check id is valid, else error message
             api = new OrderApiImpl();
-            // todo: Scan "Users.txt" for ASU ID
             String fileName = "Database/users.txt";
             String asuID;
             Scanner scanner = null;
@@ -128,17 +121,13 @@ public class A3_CheckoutController implements Initializable {
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
-            //PRINT TEST:
-
             if(confirmedUser.equals(loginPayload.userID)) {
-                // todo: send order to DB
                 try {
                     api.addOrder(checkoutOrder.orderId,checkoutOrder.pizzas);
                     api.setOrderStatus(checkoutOrder.orderId, OrderStatus.CREATED);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
-                //  todo: move to updateView
                 try {
                     FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("b5_ProcessUpdateView.fxml"));
                     root = fxmlloader.load();
@@ -151,7 +140,6 @@ public class A3_CheckoutController implements Initializable {
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
-
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -159,11 +147,6 @@ public class A3_CheckoutController implements Initializable {
                 alert.setContentText("Please enter a valid ASU ID");
                 alert.showAndWait();
             }
-
         });
-
-
-
-
     }
 }

@@ -31,29 +31,21 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class A6_ProcessAgentController implements Initializable {
-    @FXML
-    private ListView processAgentListView;
-
-    @FXML
-    private Button acceptOrderButton;
-
+    //********************** FXML Variables **********************\\
+    @FXML private ListView processAgentListView;
+    @FXML private Button acceptOrderButton;
+    // Left Side Panel\\
+    @FXML private ListView<String> orderListView;
+    // Middle Panel
+    @FXML private ListView<String> orderPizzaDetailsListView;
+    // ChoiceBox in Right Side Panel
+    @FXML private ChoiceBox<String> orderStatusChoiceBox;
+    //********************** Setting Variables **********************\\
     private Stage stage;
     private Scene scene;
     private Parent root;
-    // Left Side Panel
-    @FXML
-    private ListView<String> orderListView;
-
-    // Middle Panel
-    @FXML
-    private ListView<String> orderPizzaDetailsListView;
-
-    // ChoiceBox in Right Side Panel
-    @FXML
-    private ChoiceBox<String> orderStatusChoiceBox;
-
+    //********************** Order Variables **********************\\
     private OrderApi api;
-
     List<OrderRecord> orderRecords;
     List<OrderStatus> processingAgentOrderStatuses;
 

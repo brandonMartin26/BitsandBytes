@@ -3,24 +3,31 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="loginAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #BCBCBC;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjavafx.A1_LoginController">
    <children>
-      <Label fx:id="loginLabel" layoutX="155.0" layoutY="71.0" text="Member Login">
+      <ImageView fitHeight="400.0" fitWidth="600.0" layoutX="106.0" opacity="0.64" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../Pictures/pizza.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="loginLabel" layoutX="198.0" layoutY="105.0" text="Member Login" textFill="#110303">
          <font>
             <Font name="Imprint MT Shadow" size="45.0" />
          </font>
       </Label>
-      <Label fx:id="usernameLabel" layoutX="122.0" layoutY="176.0" text="Username">
+      <Label fx:id="usernameLabel" layoutX="122.0" layoutY="176.0" text="Username" textFill="#0d0202">
          <font>
-            <Font name="Imprint MT Shadow" size="20.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="passwordLabel" layoutX="128.0" layoutY="207.0" text="Password">
+      <Label fx:id="passwordLabel" layoutX="128.0" layoutY="207.0" text="Password" textFill="#0a0202">
          <font>
-            <Font name="Imprint MT Shadow" size="20.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
       <TextField fx:id="usernameField" layoutX="225.0" layoutY="178.0" prefHeight="26.0" prefWidth="218.0" promptText="Enter ASU email..." />
@@ -40,5 +47,10 @@
             <Font name="Imprint MT Shadow" size="15.0" />
          </font>
       </Button>
+      <Label layoutX="28.0" layoutY="14.0" prefHeight="63.0" prefWidth="425.0" text="Bits and Bytes Pizza" textFill="#9e1111">
+         <font>
+            <Font name="SignPainter-HouseScript" size="60.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

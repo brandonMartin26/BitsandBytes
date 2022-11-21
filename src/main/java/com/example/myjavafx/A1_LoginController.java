@@ -21,52 +21,32 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class A1_LoginController {
-    @FXML
-    private AnchorPane loginAnchor;
-    @FXML
-    private Button loginBtn, signUpBtn, contAsGuestBtn;
-    @FXML
-    private TextField usernameField, passwordField;
-    @FXML
-    private Label loginLabel, usernameLabel, passwordLabel, loginError;
+    //********************** FXML Variables **********************\\
+    @FXML private AnchorPane loginAnchor;
+    @FXML private Button loginBtn, signUpBtn, contAsGuestBtn;
+    @FXML private TextField usernameField, passwordField;
+    @FXML private Label loginLabel, usernameLabel, passwordLabel, loginError;
+    //********************** Setting Variables **********************\\
     private Stage stage;
     private Scene scene;
     private Parent root;
+    //********************** Other Variables **********************\\
     private LoginPayload loginPayload;
 
+    /**
+     * This method is called by "signUpBtn" button.
+     */
     public void switchToSignUp(ActionEvent event) throws IOException
     {
-        root = FXMLLoader.load(getClass().getResource("b4_SignupView.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("b4_SignupView.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-
-    public void switchToChefView(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("b7_ChefView.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToProcessAgentView(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("b6_ProcessAgentView.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToMenu(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("b2_MenuView.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
+    /**
+     * This method is called by "loginBtn" button.
+     */
     public void LoginHandler(ActionEvent event) throws IOException {
         if (usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
             loginError.setText("Please make sure all fields are full!");

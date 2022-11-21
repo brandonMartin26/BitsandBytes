@@ -18,21 +18,23 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class A4_SignupController {
+    //********************** FXML Variables **********************\\
     @FXML private Button signUp, backToLogin;
     @FXML private TextField firstName, lastName, asuID, asuEmail, password;
     @FXML private Label signUpError;
-
+    //********************** Setting Variables **********************\\
     private Stage stage;
     private Scene scene;
     private Parent root;
 
     public void switchToMemberLogin(ActionEvent event) throws IOException
     {
-        root = FXMLLoader.load(getClass().getResource("b1_LoginView.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("b1_LoginView.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -46,7 +48,7 @@ public class A4_SignupController {
         else if(password.getText().isEmpty()){ signUpError.setText("Please Enter ASU Password!"); }
         else {
             String fileName = "Database/users.txt";
-            Scanner scanner = new Scanner(Paths.get(fileName), StandardCharsets.UTF_8.name());
+            Scanner scanner = new Scanner(Paths.get(fileName), StandardCharsets.UTF_8);
             String data = scanner.useDelimiter("\\A").next();
             scanner.close();
             List<String> ids = Arrays.stream(data.split("\n")).map(line -> line.split(",")[0].trim()).collect(Collectors.toList());
@@ -70,7 +72,6 @@ public class A4_SignupController {
                     signUpError.setText("You have successfully signed up!");
 
                     firstName.clear(); lastName.clear(); asuID.clear(); asuEmail.clear(); password.clear();
-                    //***possible add, return user to the login page
                 }
                 break;
             }
