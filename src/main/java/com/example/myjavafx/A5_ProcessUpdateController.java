@@ -111,10 +111,9 @@ public class A5_ProcessUpdateController implements Initializable {
                         }
                         lastChecked = check;
 
-                        if(check.equals(OrderRecord.orderStatusToString(OrderStatus.READY))){
-                            timerLabel.setText("Your order is ready!");
-                        }
-                        else if (seconds < 10 && minutes < 10) {
+                        if(check.equals(OrderRecord.orderStatusToString(OrderStatus.CREATED))){
+                            timerLabel.setText("Your order is being processed");
+                        } else if (seconds < 10 && minutes < 10) {
                             timerLabel.setText("0" + minutes + ":0" + seconds);
                         } else if (minutes < 10) {
                             timerLabel.setText("0" + minutes + ":" + seconds);
@@ -123,10 +122,12 @@ public class A5_ProcessUpdateController implements Initializable {
                         } else {
                             timerLabel.setText(minutes + ":" + seconds);
                         }
-
                         counter--;
                         if (counter < 0){
                             counter = 0;
+                        }
+                        if (check.equals(OrderRecord.orderStatusToString(OrderStatus.READY))){
+                            timerLabel.setText("Your order is ready!");
                         }
                     });
                 } catch(Exception e){
