@@ -133,6 +133,7 @@ public class A2_MenuController implements Initializable {
                         orderLabel.setText(finalOrder);
                         cartVbox.getChildren().add(orderLabel);
                         pizzas.add(new PizzaRecord(orderId, pizzaType, toppings));
+                        clearOptions();
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Error");
@@ -153,6 +154,7 @@ public class A2_MenuController implements Initializable {
             clearOrderBtn.setOnAction(e -> {
                 cartVbox.getChildren().clear();
                 pizzas.clear();
+                clearOptions();
             });
 
             // "checkoutBtn" button action \\
@@ -187,5 +189,14 @@ public class A2_MenuController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    private void clearOptions(){
+        pepRadio.setSelected(false);
+        vegRadio.setSelected(false);
+        cheeseRadio.setSelected(false);
+        exCheeseCheckbox.setSelected(false);
+        mushCheckbox.setSelected(false);
+        olivesCheckbox.setSelected(false);
+        onionCheckbox.setSelected(false);
     }
 }

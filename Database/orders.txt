@@ -1,2 +1,8 @@
 100030;Cooking
 100014;Cooking
+100047;ReadyToCook
+100034;Ready
+100049;ReadyToCook
+100015;Ready
+100056;Ready
+100003;Ready

@@ -68,9 +68,10 @@ public class A5_ProcessUpdateController implements Initializable {
                         try {
                             api = new OrderApiImpl();
                             String check = OrderRecord.orderStatusToString(api.getOrderStatus(checkoutOrder.orderId));
-                            if (check.equals(OrderRecord.orderStatusToString(OrderStatus.ACCEPTED))) {
+                            if (check.equals(OrderRecord.orderStatusToString(OrderStatus.CREATED))) {
                                 acceptedLabel.setStyle("-fx-background-color: #7CFC00");
                             } else if (check.equals(OrderRecord.orderStatusToString(OrderStatus.READYTOCOOK))) {
+                                //todo: test this to see if able to delete "acceptedLabel" from this else-if statement
                                 acceptedLabel.setStyle("-fx-background-color: #7CFC00");
                                 readyToCookLabel.setStyle("-fx-background-color: #7CFC00");
                             } else if (check.equals(OrderRecord.orderStatusToString(OrderStatus.COOKING))) {
