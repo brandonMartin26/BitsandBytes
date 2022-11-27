@@ -113,7 +113,8 @@ public class A5_ProcessUpdateController implements Initializable {
                         lastChecked = check;
 
                         if(check.equals(OrderRecord.orderStatusToString(OrderStatus.CREATED))){
-                            timerLabel.setText("Your order is being processed");
+                            timerLabel.setFont(javafx.scene.text.Font.font("System Bold", 40));
+                            timerLabel.setText("Your order is processing...");
                         } else if (seconds < 10 && minutes < 10) {
                             timerLabel.setText("0" + minutes + ":0" + seconds);
                         } else if (minutes < 10) {

@@ -9,3 +9,14 @@
 100056;Pepperoni;Mushrooms,Olives,Onions
 100056;Cheese;Mushrooms
 100003;Pepperoni;Mushrooms
+100042;Pepperoni;Mushrooms,Onions
+100042;Vegetable;Mushrooms,Onions
+100042;Cheese;Olives
+100089;Pepperoni;Mushrooms
+100089;Vegetable;Olives,Onions
+100089;Cheese;Mushrooms,Olives,Onions
+100054;Pepperoni;Mushrooms
+100054;Vegetable;Mushrooms,Onions
+100054;Cheese;Mushrooms,Olives,Onions
+100057;Pepperoni;Mushrooms
+100075;Pepperoni;Mushrooms
